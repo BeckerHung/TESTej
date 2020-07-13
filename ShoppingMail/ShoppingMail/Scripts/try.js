@@ -10,12 +10,7 @@
 //var root = '@Url.Content("~/")';
 
 
-//功能:點圖兩下出現大手>縮小>消失
-var showpicture = function (e) {
-    $('.pop').fadeIn(1000);
-    $('.pop').animate({ height: '50px', width: '50px' },300);
-    $('.pop').hide(50);
-}
+
 
 //功能:按讚計數
 function like(pid) {
@@ -23,27 +18,10 @@ function like(pid) {
         url: '/Home/like',
         type: 'GET',
         data: { pid: pid },
-        success: function (result) {
-            var like = $('input[name="showlike"]').data('likenum');
-            var like2 = $('p[name="showlike"]').text;  
-            console.log(like2);
-            //說明:局部更新
-            //$("#productcard").load("/Home/Index "); 
-            if (like == 0)
-            {
-                like += 1;
-            }
-            else
-            {
-                like -= 1;
-            }
-            console.log(like);
-            $('label[name="showlike"]').data(like);
-            
-            //$('p[name="showlike"]').load("/Home/Index"); 
-             
-            //var temp = $('label[name="showlike"]').value;
-            //$('input[name="showlike"]').value = temp - 1;
+        success: function (likenum) {
+            var id = pid-1
+            var temp = "按讚數:" + likenum;
+            $('p[name="showlike"]')[id].innerHTML = temp;  
         },
         error: function (jqXHR) {
             var msg = '';
@@ -92,7 +70,13 @@ $(function () {
    
 
 })
-
+//功能:點圖兩下出現大手>縮小>消失
+var showpicture = function (e) {
+    $('.pop').animate({ height: '200px', width: '200px' }, 500);
+    $('.pop').fadeIn(2000);
+    $('.pop').animate({ height: '50px', width: '50px' }, 500);
+    $('.pop').hide(50);
+}
 //功能:加入購物車
 function addCar(fPId) {
     $.ajax({
@@ -101,7 +85,7 @@ function addCar(fPId) {
         data: { fPId: fPId },
         async: false,
         success: function (result) {
-            console.log(result);
+           // console.log(result);
         },
         error: function (jqXHR) {
             var msg = '';

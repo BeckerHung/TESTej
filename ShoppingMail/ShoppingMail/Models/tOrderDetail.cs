@@ -23,5 +23,7 @@ namespace ShoppingMail.Models
         public Nullable<int> fQty { get; set; }
         public string fIsApproved { get; set; }
         public string fImg { get; set; }
+        public string fColor { get; set; }
+        public string fSize { get; set; }
     }
 }

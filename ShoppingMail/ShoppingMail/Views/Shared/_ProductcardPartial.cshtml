@@ -21,13 +21,15 @@
             //說明:按讚一次有效，第二次失效!!!
             $('img[name="bighand"]').on('dblclick', function (e)
             {
-                
                 like($(this).data('imgid'));
                 showpicture();
             });
             //功能:加入購物車
             $('a[name = "addShoppingcar"]').on('click', function (e) {
                 var fPId = $(this).data('addcar');
+                //var temp = $(this).data('addcar').parent();
+                //console.log(temp);
+
                 swal({
                     title: "加入購物車",
                     text: "確定加入嗎",
@@ -40,6 +42,7 @@
                     if (isConfirm) {
                         swal("確定", "加入成功!", "success");
                         addCar(fPId);
+                        
                         var num = parseInt(document.getElementById("showShoppingcarnum").innerText);
                         num += 1;
                         document.getElementById("showShoppingcarnum").innerText = num;
@@ -79,14 +82,6 @@
 
 
 
-
-
-
-
-
-
-
-
 <script>
     //功能:主畫面呈現商品Cards View
     function createCard(array) {
@@ -96,16 +91,14 @@
             html_2 += '<div class="col-lg-4">';
             html_2 += '<div class="card" style="width: 18rem;" >';
             //說明:對卡片做click綁定
-            html_2 += '<img src="' + root + 'Images/' + item.fImg + '" style="width:100%" name="bighand" data-imgid="' + item.fId + '" class="btn" onclick="like(' + item.fId + ')"/>';
+            html_2 += '<img src="' + root + 'Images/' + item.fImg + '" style="width:100%" name="bighand" data-imgid="' + item.fId + '" class="btn" /*onclick="like(' + item.fId + ')"*//>';
             html_2 += '<div class="card-body">'
             html_2 += '<h5 class="card-title">' + item.fName + '</h5>';
             html_2 += '<p>售價:' + item.fPrice + '</p>';
             //說明:按讚小手
             html_2 += '<div><img src="' + root + 'Images/小手.jpg" class="like text-right" style="width:30%" onclick="like(' + item.fId + ')"/>';
             //說明:顯示按讚數
-            //html_2 += '<label for="like" name="showlike">按讚數:' + item.fP_islike + '</label></div>';
-            html_2 += '<p name="showlike" data-likenum="' + item.fP_islike + '">按讚數:' + item.fP_islike + '</p></div>';
-            //html_2 += '<input type = "text" name="showlike" /></div>';
+            html_2 += '<p name="showlike" >按讚數:' + item.fP_islike + '</p></div>';
             html_2 += '</div>';
             html_2 += '<div class="card-footer bg-white border-top-0">';
             //說明:燈箱
@@ -145,27 +138,29 @@
             html_2 += '</div>';
             //說明:選擇尺寸
             html_2 += '尺寸';
-            html_2 += '<a class="btn-secondary" data-th="Size"> <select name="" id="" class="form-control mr-1">';
+            html_2 += '<a class="btn-secondary" data-th="Size"> <select name="" id="fSize" class="form-control mr-1">';
             html_2 += '<option value="S">S</option><option value="M">M</option><option value="L">L</option>';
             html_2 += '</select></a>';
             //說明:選擇顏色
             html_2 += '顏色';
-            html_2 += '<a class="cart-label" data-th="Color"> <select name="" id="" class="form-control mr-1">';
+            html_2 += '<a class="cart-label" data-th="Color"> <select name="" id="fColor" class="form-control mr-1">';
             html_2 += '<option value="r">紅色</option><option value="w">白色</option><option value="b">黑色</option>';
             html_2 += '</select></a>';
             //說明:選擇數量
             html_2 += '數量'
             html_2 += '<div class="cart-label" data-th="Quantity">';
-            html_2 += '<input type = "number" value="1" max = "' + item.fQty + '" min = "1" >';
-            html_2 += '<p>此商品供貨上限為' + item.fQty + '</p>';
+            html_2 += '<input type = "number"  id="fQty" value="1" max = "' + item.fQty + '" min = "1" >';    
             html_2 += '</div>';
+            //說明:加入購物車
+            html_2 += '<a class="btn btn-light" name="addShoppingcar" data-addcar="' + item.fId + '"> 加入購物車</a>';
+            //說明:加入購物車
             html_2 += '</div>';
             //說明:燈箱下方
             html_2 += '<div class="modal-footer">';
             //說明:加入購物車
-           
-            html_2 += '<a class="btn btn-light" name="addShoppingcar" data-addcar="' + item.fId + '"> 加入購物車</a>';
-            html_2 += '</div>';
+            //html_2 += '<a class="btn btn-light" name="addShoppingcar" data-addcar="' + item.fId + '"> 加入購物車</a>';
+            html_2 += '<p>提醒:此商品供貨上限為' + item.fQty + '</p>';
+            html_2 += '</div>';        
             html_2 += '</div>';
             html_2 += '</div>';
             html_2 += '</div>';
@@ -173,6 +168,7 @@
             html_2 += '</div>';
             html_2 += '</div>';
             html_2 += '</div>';
+           
         })
         return html_2;
     }

@@ -56,6 +56,8 @@
     <Property Name="fPId" Type="int" />
     <Property Name="fName" Type="nvarchar" MaxLength="50" />
     <Property Name="fPrice" Type="int" />
+    <Property Name="fColor" Type="nvarchar" MaxLength="50" />
+    <Property Name="fSize" Type="nvarchar" MaxLength="50" />
     <Property Name="fQty" Type="int" />
     <Property Name="fIsApproved" Type="nvarchar" MaxLength="50" />
     <Property Name="fImg" Type="nvarchar" MaxLength="50" />

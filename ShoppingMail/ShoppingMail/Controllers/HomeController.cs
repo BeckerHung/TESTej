@@ -124,8 +124,18 @@ namespace ShoppingMail.Controllers
 
         }
 
+        //功能:加入購物車_表單
+        //public class tFormModel
+        //{
+        //    public int fFUserId { get; set; }
+        //    public int fFPId { get; set; }
+        //    public string fFSize { get; set; }
+        //    public string fFColor { get; set; }
+        //    public int fFQty { get; set; }
+        //}
+
+
         //說明:加入購物車
-        //Get:Index/AddCar
         public ActionResult AddCar(int fPId)
         {
             //說明:取得會員帳號並指定給fUserId
@@ -420,7 +430,9 @@ namespace ShoppingMail.Controllers
                 db.tProduct.FirstOrDefault(x => x.fPId == pid).fP_islike = dislike;
             }
             db.SaveChanges();
-            return Json(new { success = true } ,JsonRequestBehavior.AllowGet);
+            var likenum = db.tProduct.FirstOrDefault(x => x.fPId == pid).fP_islike;
+            //return Json(new { success = true } ,JsonRequestBehavior.AllowGet);
+            return Json(likenum, JsonRequestBehavior.AllowGet);
         }
 
         

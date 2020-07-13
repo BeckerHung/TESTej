@@ -7,9 +7,9 @@
       <Diagram DiagramId="56147c527ebe48abbf400767ac508f58" Name="Diagram1">
         <EntityTypeShape EntityType="dbShoppingMailModel.tMember" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="dbShoppingMailModel.tOrder" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbShoppingMailModel.tOrderDetail" Width="1.5" PointX="7" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbShoppingMailModel.tOrderDetail" Width="1.5" PointX="8.5" PointY="0.625" IsExpanded="true" />
         <EntityTypeShape EntityType="dbShoppingMailModel.tProductCategory" Width="1.5" PointX="3.375" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbShoppingMailModel.tProductProperty" Width="1.5" PointX="7" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbShoppingMailModel.tProductProperty" Width="1.5" PointX="8.5" PointY="4.125" IsExpanded="true" />
         <EntityTypeShape EntityType="dbShoppingMailModel.ThumbsUp" Width="1.5" PointX="0.75" PointY="3.75" />
         <EntityTypeShape EntityType="dbShoppingMailModel.tExchangeRate" Width="1.5" PointX="2.875" PointY="1.5" />
         <EntityTypeShape EntityType="dbShoppingMailModel.tAttributes" Width="1.5" PointX="0.75" PointY="6.75" />

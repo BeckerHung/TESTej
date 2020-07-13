@@ -28,6 +28,8 @@
     <EntitySetMapping Name="tOrderDetail">
       <EntityTypeMapping TypeName="dbShoppingMailModel.tOrderDetail">
         <MappingFragment StoreEntitySet="tOrderDetail">
+          <ScalarProperty Name="fSize" ColumnName="fSize" />
+          <ScalarProperty Name="fColor" ColumnName="fColor" />
           <ScalarProperty Name="fImg" ColumnName="fImg" />
           <ScalarProperty Name="fId" ColumnName="fId" />
           <ScalarProperty Name="fOrderId" ColumnName="fOrderId" />
