@@ -1,0 +1,180 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.btn-cart {
+    background-color: transparent;
+    position: relative;
+}
+
+.btn-cart .badge {
+    position: absolute;
+    top: -1px;
+    right: -1px;
+}
+
+.btn.disable {
+    pointer-events: none;
+}
+
+.dropdown-menu-right {
+    right: 0;
+    left: auto;
+}
+
+.jumbotron-bg {
+    background-image: url('https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80');
+    background-size: cover;
+    background-position: center center;
+    min-height: 350px;
+    color: white;
+}
+
+.bg-lighter {
+    background-color: rgba(255, 255, 255, 0.55);
+}
+
+.box-shadow {
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.16);
+    transition: box-shadow .3s;
+}
+
+.box-shadow:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.24)
+}
+
+.alert-rounded {
+    border-radius: 50px;
+}
+
+
+/* 按讚test */
+.like {
+    font-size: 20px;
+    color: #ccc;
+    cursor: pointer;
+}
+
+.cs {
+    color: #f00;
+}
+
+
+
+/* swiper */
+html,
+body {
+    position: relative;
+    height: 60%;
+}
+
+body {
+    background: #eee;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #000;
+    margin: 0;
+    padding: 0;
+}
+
+.swiper-container {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+/*幣別*/
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+
+.currency {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.currency select {
+   background: transparent;
+   background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%20000002%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+   background-repeat: no-repeat, repeat;
+   background-position: right .2em top 50%, 0 0;
+   background-size: .50em auto, 100%;
+   border: 0;
+   padding-right: 20px;
+   font-size: 22px;
+   -moz-appearance: none;
+   -webkit-appearance: none;
+   appearance: none;
+}
+
+    .currency input {
+        border: 0;
+        background: transparent;
+        font-size: 22px;
+        text-align: right;
+    }
+
+.middle {
+    color: rgb(0, 117, 235);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.middle button {
+    background-color: #fff;
+    border: 2px solid #ecf0f1;
+    border-radius: 50%;
+    cursor: pointer;
+    color: rgb(0, 117, 235);
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+     width: 30px;
+    transform: rotate(90deg);
+}    
+
+.middle button:active {
+    transform: rotate(90deg) scale(0.9);
+}
+.middle .rate {
+    background-color: #fff;
+    border: 2px solid #ecf0f1;
+    border-radius: 50px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    padding: 0 10px;
+    margin: 30px 15px 30px 25px;
+}
+
+select:focus, input:focus, button:focus {
+    outline: 0;
+}
+

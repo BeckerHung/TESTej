@@ -1,0 +1,56 @@
+﻿@model IEnumerable<ShoppingMail.Models.tOrderDetail>
+
+@{
+    ViewBag.Title = "訂單明細";
+    int TotalPrice = 0;
+}
+
+<h2>訂單明細</h2>
+
+<div class="container py-5 " id="finishcheck ">
+    <h1 class="text-center mb-3 text-secondary ">結帳完成</h1>
+    <div class="alert alert-success alert-rounded text-center ">完成</div>
+    <table class="table table w-100 table-sm">
+        <thead class="thead-light">
+            <tr>
+                <th width="100">
+                    @Html.DisplayNameFor(model => model.fName)
+                </th>
+
+                <th width="100">
+                    @Html.DisplayNameFor(model => model.fPrice)
+                </th>
+                <th width="100">
+                    @Html.DisplayNameFor(model => model.fQty)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                TotalPrice += Convert.ToInt32(item.fPrice) * Convert.ToInt32(item.fQty);
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.fName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.fPrice)
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.fQty)
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="text-right">
+                    訂單金額：$&nbsp;@TotalPrice
+                </td>
+            </tr>
+
+        </tfoot>
+    </table>
+
+</div>
