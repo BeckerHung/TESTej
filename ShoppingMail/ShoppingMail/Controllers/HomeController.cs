@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure.Interception;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Web;
 using System.Web.Configuration;
 using System.Web.Mvc;
+using System.Web.Razor.Generator;
 using Microsoft.Ajax.Utilities;
 using ShoppingMail.Models;
+
 
 
 namespace ShoppingMail.Controllers
@@ -436,7 +439,7 @@ namespace ShoppingMail.Controllers
         }
         //功能:建立產品新增頁面(複雜模型繫結)
         [HttpPost]
-        public ActionResult Create(ProductModel product)
+        public ActionResult Create(ProductModel product,HttpPostedFileBase photo)
         {
             ViewBag.Id = product.Id;
             ViewBag.CategoryId = product.CategoryId;
@@ -445,10 +448,59 @@ namespace ShoppingMail.Controllers
             ViewBag.Description = product.Description;
             ViewBag.Stock = product.Stock;
             ViewBag.Price = product.Price;
-            ViewBag.Img = product.Img;
-            return View();
-
+            
+            //說明:檔案上傳
+            string fileName = "";
+            if (photo != null)  //檔案不為null
+            {
+                if (photo.ContentLength > 0) //檔案大小>0 
+                {
+                    fileName = Path.GetFileName(photo.FileName); //說明:取得檔名
+                    var path = Path.Combine(Server.MapPath("~/Photos"), fileName);
+                    photo.SaveAs(path);
+                }
+            }
+            //說明:目前新增哪些照片
+            return RedirectToAction("ShowPhotos");
         }
+        public string ShowPhotos() 
+        {
+            string show = "";
+            //說明:建立可操作Photos資料夾的物件(dir)
+            DirectoryInfo dir = new DirectoryInfo(Server.MapPath("~/Photos"));
+            //說明:取得dir物件下所有檔案，並放入fInfo檔案資訊陣列
+            FileInfo[] fInfo = dir.GetFiles();
+            int n = 0;
+            foreach (FileInfo item in fInfo) 
+            {
+                n++;
+                show += "<a href='../Photos/" + item.Name + "'targer='_blank'><img src='../Photos/" +
+                        item.Name + "'width='350' height='200' border='0'></a>";
+                if (n % 5 == 0) 
+                {
+                    show += "<p>";
+                }
+
+            }
+            show += "<p><a href='Create'>返回商品新增頁面</a></p>";
+            return show;
+        }
+
+        //public ActionResult Product(ProductModel product)
+        //{
+        //    List<ProductModel> list = new List<ProductModel>();
+        //    ProductModel product = new ProductModel();
+        //    order.fOrderId = guid;
+        //    order.fUserId = fUserId;
+        //    order.fReceiver = fReceiver;
+        //    order.fEmail = fEmail;
+        //    order.fAddress = "1" /*fAddress*/;
+        //    order.fDate = DateTime.Now;
+        //    db.tOrder.Add(order);
+
+        //}
+
+
 
     }
 

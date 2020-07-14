@@ -132,6 +132,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CategoryModel.cs" />
     <Compile Include="Models\dbShoppingMailModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -287,6 +288,7 @@
     <Content Include="Views\Home\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Photos\" />
     <Folder Include="Views\Razor\" />
   </ItemGroup>
   <ItemGroup>

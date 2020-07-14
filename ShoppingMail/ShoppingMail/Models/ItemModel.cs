@@ -7,7 +7,7 @@ namespace ShoppingMail.Models
 {
     public class ItemModel
     {
-        protected int _id, _categoryid, _price ;
+        protected int _id, _categoryid, _parentCategory_Id,  _price ;
         protected string _name, _suppliername, _description, _img ;
 
         public int Id 
@@ -31,7 +31,18 @@ namespace ShoppingMail.Models
                     _categoryid = value;
                 }
             }
-        }      
+        }
+        public int ParentCategory_Id 
+        {
+            get { return _parentCategory_Id; }
+            set
+            {
+                if (_parentCategory_Id >= 0)
+                {
+                    _parentCategory_Id = value;
+                }
+            }
+        }
         public string Name
         {
             get { return _name; }
@@ -63,6 +74,5 @@ namespace ShoppingMail.Models
             get { return _img; }
             set { _img = value; }
         }
-
     }
 }
