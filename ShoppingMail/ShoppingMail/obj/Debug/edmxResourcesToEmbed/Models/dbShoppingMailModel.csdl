@@ -67,6 +67,8 @@
     <EntitySet Name="tAttributes" EntityType="dbShoppingMailModel.tAttributes" />
     <EntitySet Name="tProductStock" EntityType="dbShoppingMailModel.tProductStock" />
     <EntitySet Name="tProduct" EntityType="dbShoppingMailModel.tProduct" />
+    <EntitySet Name="ItemModel" EntityType="dbShoppingMailModel.ItemModel" />
+    <EntitySet Name="ProductModel" EntityType="dbShoppingMailModel.ProductModel" />
   </EntityContainer>
   <EntityType Name="ThumbsUp">
     <Key>
@@ -118,5 +120,32 @@
     <Property Name="fImg" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="fP_islike" Type="Int32" />
     <Property Name="fChangeQTY" Type="Int32" />
+  </EntityType>
+  <EntityType Name="ItemModel">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryId" Type="Int32" Nullable="false" />
+    <Property Name="ParentCategoryId" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SupplierName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Int32" Nullable="false" />
+    <Property Name="Img" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ProductModel">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryId" Type="Int32" Nullable="false" />
+    <Property Name="ParentCategoryId" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SupplierName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Int32" Nullable="false" />
+    <Property Name="Img" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Stock" Type="Int32" Nullable="false" />
   </EntityType>
 </Schema>

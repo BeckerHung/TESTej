@@ -16,7 +16,7 @@
         <p>庫存:<input type="text" name="Stock" id="Stock" value="@ViewBag.Stock" required /></p>
         <p>介紹:</p>
         <div id="editor">
-            <input type="text" name="Description" id="Description" value="@ViewBag.Description" required />
+            <input type="text" name="Description" id="Description" value="@ViewBag.Description"  />
         </div>
         <p>商品圖片:</p>
         <div>
@@ -38,9 +38,11 @@
     </div>
 </form>
 
-<script>
+@*<script>
     ClassicEditor
-    .create( document.querySelector( '#editor' ) )
-    .then( editor => { console.log( editor ); } )
-    .catch( error => { console.error( error );} );
-</script>
+        .create(document.querySelector('#editor'))
+        .then(editor => { console.log(editor); })
+        .catch(error => { console.error(error); });
+</script>*@
+
+<script>CKEDITOR.replace("editor");</script>

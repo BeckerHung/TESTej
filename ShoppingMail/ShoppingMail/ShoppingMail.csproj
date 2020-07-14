@@ -132,7 +132,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\CategoryModel.cs" />
     <Compile Include="Models\dbShoppingMailModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -149,8 +148,12 @@
       <DependentUpon>dbShoppingMailModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\ICalculateQty.cs" />
-    <Compile Include="Models\ItemModel.cs" />
-    <Compile Include="Models\ProductModel.cs" />
+    <Compile Include="Models\ItemModel.cs">
+      <DependentUpon>dbShoppingMailModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductModel.cs">
+      <DependentUpon>dbShoppingMailModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Shoppingcarmodel.cs" />
     <Compile Include="Models\tAttributes.cs">
       <DependentUpon>dbShoppingMailModel.tt</DependentUpon>
@@ -286,6 +289,7 @@
     <Content Include="Views\Shared\_testPartial.cshtml" />
     <Content Include="Views\Shared\_CardPartial.cshtml" />
     <Content Include="Views\Home\Create.cshtml" />
+    <Content Include="Views\Home\ShowProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Photos\" />

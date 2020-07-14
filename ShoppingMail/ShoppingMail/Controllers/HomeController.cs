@@ -443,6 +443,7 @@ namespace ShoppingMail.Controllers
         {
             ViewBag.Id = product.Id;
             ViewBag.CategoryId = product.CategoryId;
+            ViewBag.ParentCategory_Id = product.ParentCategory_Id;
             ViewBag.Name = product.Name;
             ViewBag.SupplierName = product.SupplierName;
             ViewBag.Description = product.Description;
@@ -475,7 +476,7 @@ namespace ShoppingMail.Controllers
             {
                 n++;
                 show += "<a href='../Photos/" + item.Name + "'targer='_blank'><img src='../Photos/" +
-                        item.Name + "'width='350' height='200' border='0'></a>";
+                        item.Name + "'width='350' height='400' border='0'></a>";
                 if (n % 5 == 0) 
                 {
                     show += "<p>";
@@ -486,19 +487,15 @@ namespace ShoppingMail.Controllers
             return show;
         }
 
-        //public ActionResult Product(ProductModel product)
-        //{
-        //    List<ProductModel> list = new List<ProductModel>();
-        //    ProductModel product = new ProductModel();
-        //    order.fOrderId = guid;
-        //    order.fUserId = fUserId;
-        //    order.fReceiver = fReceiver;
-        //    order.fEmail = fEmail;
-        //    order.fAddress = "1" /*fAddress*/;
-        //    order.fDate = DateTime.Now;
-        //    db.tOrder.Add(order);
 
-        //}
+        public ActionResult ShowProduct()
+        {
+            
+            var allproducts = db.ProductModel.ToList();
+
+            return View("ShowProduct", "_Layout",allproducts);
+        }
+
 
 
 
