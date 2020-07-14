@@ -431,6 +431,102 @@ namespace ShoppingMail.Controllers
             return Json(likenum, JsonRequestBehavior.AllowGet);
         }
 
+        public class ItemModel
+        {
+
+            protected int _id, _categoryid, _parentCategory_Id, _price;
+            protected string _name, _suppliername, _description, _img;
+
+            public int Id
+            {
+                get { return _id; }
+                set
+                {
+                    if (_id >= 0)
+                    {
+                        _id = value;
+                    }
+                }
+            }
+            public int CategoryId
+            {
+                get { return _categoryid; }
+                set
+                {
+                    if (_categoryid >= 0)
+                    {
+                        _categoryid = value;
+                    }
+                }
+            }
+            public int ParentCategory_Id
+            {
+                get { return _parentCategory_Id; }
+                set
+                {
+                    if (_parentCategory_Id >= 0)
+                    {
+                        _parentCategory_Id = value;
+                    }
+                }
+            }
+            public string Name
+            {
+                get { return _name; }
+                set { _name = value; }
+            }
+            public string SupplierName
+            {
+                get { return _suppliername; }
+                set { _suppliername = value; }
+            }
+            public string Description
+            {
+                get { return _description; }
+                set { _description = value; }
+            }
+            public int Price
+            {
+                get { return _price; }
+                set
+                {
+                    if (_price >= 0)
+                    {
+                        _price = value;
+                    }
+                }
+            }
+            public string Img
+            {
+                get { return _img; }
+                set { _img = value; }
+            }
+
+        }
+
+        public class ProductModel : ItemModel, ICalculateQty
+        {
+            protected int _stock;
+            public int Stock
+            {
+                get { return _stock; }
+                set
+                {
+                    if (_stock >= 0)
+                    {
+                        _stock = value;
+                    }
+                }
+            }
+
+            public int CalculateQty()
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+
+
         //功能:建立產品新增頁面
         //GET:ComplexBind
         public ActionResult Create() 
@@ -441,6 +537,17 @@ namespace ShoppingMail.Controllers
         [HttpPost]
         public ActionResult Create(ProductModel product,HttpPostedFileBase photo)
         {
+            //tProductModel temp = new tProductModel();
+            //temp.Id = product.Id;
+            //temp.CategoryId = product.CategoryId;
+            //temp.ParentCategoryId = product.ParentCategory_Id;
+            //temp.Name = product.Name;
+            //temp.SupplierName = product.SupplierName;
+            //temp.Description = product.Description;
+            //temp.Stock = product.Stock;
+            //temp.Price = product.Price;
+            //db.tProductModel.Add(temp);
+
             ViewBag.Id = product.Id;
             ViewBag.CategoryId = product.CategoryId;
             ViewBag.ParentCategory_Id = product.ParentCategory_Id;
@@ -449,11 +556,12 @@ namespace ShoppingMail.Controllers
             ViewBag.Description = product.Description;
             ViewBag.Stock = product.Stock;
             ViewBag.Price = product.Price;
-            
-            //說明:檔案上傳
-            string fileName = "";
+
+            //說明: 檔案上傳
+            //
             if (photo != null)  //檔案不為null
             {
+                string fileName = "";
                 if (photo.ContentLength > 0) //檔案大小>0 
                 {
                     fileName = Path.GetFileName(photo.FileName); //說明:取得檔名
@@ -461,8 +569,13 @@ namespace ShoppingMail.Controllers
                     photo.SaveAs(path);
                 }
             }
-            //說明:目前新增哪些照片
+
+            //db.SaveChanges();
+
+            //說明:顯示目前新增哪些商品照片
             return RedirectToAction("ShowPhotos");
+            
+            //return View();
         }
         public string ShowPhotos() 
         {
@@ -488,13 +601,7 @@ namespace ShoppingMail.Controllers
         }
 
 
-        public ActionResult ShowProduct()
-        {
-            
-            var allproducts = db.ProductModel.ToList();
-
-            return View("ShowProduct", "_Layout",allproducts);
-        }
+    
 
 
 

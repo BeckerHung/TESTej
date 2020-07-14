@@ -7,13 +7,13 @@
 
 <form method="post" action="@Url.Action("Create")" enctype="multipart/form-data">
     <div>
-        <p>商品編號:<input type="text" name="Id" id="Id" value="@ViewBag.Id" required /></p>
-        <p>商品類別:<input type="text" name="CategoryId" id="CategoryId" value="@ViewBag.CategoryId" required /></p>
-        <p>商品父類別:<input type="text" name="ParentCategory_Id" id="ParentCategory_Id" value="@ViewBag.ParentCategory_Id" required /></p>
-        <p>商品名稱:<input type="text" name="Name" id="Name" value="@ViewBag.Name" required /></p>
-        <p>公司名稱:<input type="text" name="SupplierName" id="SupplierName" value="@ViewBag.SupplierName" required /></p>
-        <p>售價:<input type="text" name="Price" id="Price" value="@ViewBag.Price" required /></p>
-        <p>庫存:<input type="text" name="Stock" id="Stock" value="@ViewBag.Stock" required /></p>
+        <p>商品編號:<input type="text" name="Id" id="Id" value="@ViewBag.Id" @*required*@ /></p>
+        <p>商品類別:<input type="text" name="CategoryId" id="CategoryId" value="@ViewBag.CategoryId" @*required*@ /></p>
+        <p>商品父類別:<input type="text" name="ParentCategory_Id" id="ParentCategory_Id" value="@ViewBag.ParentCategory_Id" @*required*@ /></p>
+        <p>商品名稱:<input type="text" name="Name" id="Name" value="@ViewBag.Name" @*required*@ /></p>
+        <p>公司名稱:<input type="text" name="SupplierName" id="SupplierName" value="@ViewBag.SupplierName" @*required*@ /></p>
+        <p>售價:<input type="text" name="Price" id="Price" value="@ViewBag.Price" @*required*@ /></p>
+        <p>庫存:<input type="text" name="Stock" id="Stock" value="@ViewBag.Stock" @*required*@ /></p>
         <p>介紹:</p>
         <div id="editor">
             <input type="text" name="Description" id="Description" value="@ViewBag.Description"  />
@@ -38,11 +38,6 @@
     </div>
 </form>
 
-@*<script>
-    ClassicEditor
-        .create(document.querySelector('#editor'))
-        .then(editor => { console.log(editor); })
-        .catch(error => { console.error(error); });
-</script>*@
+
 
 <script>CKEDITOR.replace("editor");</script>

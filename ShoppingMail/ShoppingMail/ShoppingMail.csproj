@@ -164,6 +164,9 @@
     <Compile Include="Models\ThumbsUp.cs">
       <DependentUpon>dbShoppingMailModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tItemModel.cs">
+      <DependentUpon>dbShoppingMailModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tMember.cs">
       <DependentUpon>dbShoppingMailModel.tt</DependentUpon>
     </Compile>
@@ -177,6 +180,9 @@
       <DependentUpon>dbShoppingMailModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tProductCategory.cs">
+      <DependentUpon>dbShoppingMailModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tProductModel.cs">
       <DependentUpon>dbShoppingMailModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tProductProperty.cs">
@@ -228,6 +234,7 @@
       <LastGenOutput>dbShoppingMailModel.Context.cs</LastGenOutput>
       <DependentUpon>dbShoppingMailModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Models\dbShoppingMailModel.edmx.sql" />
     <Content Include="Models\dbShoppingMailModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>dbShoppingMailModel.edmx</DependentUpon>
