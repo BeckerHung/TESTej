@@ -78,11 +78,11 @@ var showpicture = function (e) {
     $('.pop').hide(50);
 }
 //功能:加入購物車
-function addCar(fPId) {
+function addCar(fPId,fSize,fColor,fQty) {
     $.ajax({
         url: '/Home/AddCar',
         type: 'GET',
-        data: { fPId: fPId },
+        data: { fPId: fPId, fSize: fSize, fColor: fColor, fQty: fQty },
         async: false,
         success: function (result) {
            // console.log(result);

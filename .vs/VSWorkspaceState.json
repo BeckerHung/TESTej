@@ -1,11 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\ShoppingMail",
-    "\\ShoppingMail\\ShoppingMail",
-    "\\ShoppingMail\\ShoppingMail\\Views",
-    "\\ShoppingMail\\ShoppingMail\\Views\\Home"
+    "\\ShoppingMail"
   ],
-  "SelectedNode": "\\ShoppingMail\\ShoppingMail\\Views\\Home\\Index.cshtml",
+  "SelectedNode": "\\ShoppingMail\\ShoppingMail.sln",
   "PreviewInSolutionExplorer": false
 }

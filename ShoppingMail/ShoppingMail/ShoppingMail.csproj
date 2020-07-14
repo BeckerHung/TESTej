@@ -147,6 +147,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dbShoppingMailModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\ICalculateQty.cs" />
+    <Compile Include="Models\ItemModel.cs" />
+    <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\Shoppingcarmodel.cs" />
     <Compile Include="Models\tAttributes.cs">
       <DependentUpon>dbShoppingMailModel.tt</DependentUpon>
@@ -237,6 +240,7 @@
       <DependentUpon>dbShoppingMailModel.edmx</DependentUpon>
     </Content>
     <Content Include="Scripts\jquery-1.11.1.min.map" />
+    <Content Include="libman.json" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.11.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -280,6 +284,7 @@
     <Content Include="Views\Shared\_ProductcardPartial.cshtml" />
     <Content Include="Views\Shared\_testPartial.cshtml" />
     <Content Include="Views\Shared\_CardPartial.cshtml" />
+    <Content Include="Views\Home\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Razor\" />

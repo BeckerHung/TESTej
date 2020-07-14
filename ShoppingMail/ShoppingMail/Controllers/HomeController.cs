@@ -115,28 +115,19 @@ namespace ShoppingMail.Controllers
                        orderby A.fPId
                        //說明:動態型別
                        //select new { fPId = C.fId, fPName = A.fName, fPrice = A.fPrice, fQty = B.fQty, fImg = A.fImg, fColor = B.fAId_1,fSize=B.fAId_2,fOrderQty = C.fQty, fUserId = D.fId};
-                       select new Shoppingcarmodel { fOrderId = C.fOrderId, fUserId=C.fUserId, fPId=C.fPId, fPName=C.fName, fPrice=A.fPrice, fMaxQty = B.fQty, fOrderQty=C.fQty,fImg = A.fImg, fChangeQTY = A.fChangeQTY, fSupplyLimit=B.fSupplyLimit, fAId_1 = B.fAId_1, fAId_2 = B.fAId_2, fAName=E.fAName};
-           
+                       select new Shoppingcarmodel { fOrderId = C.fOrderId, fUserId = C.fUserId, fPId = C.fPId, fPName = C.fName, fPrice = A.fPrice, fMaxQty = B.fQty, fOrderQty = C.fQty, fImg = A.fImg, fChangeQTY = A.fChangeQTY, fSupplyLimit = B.fSupplyLimit, fAId_1 = B.fAId_1, fAId_2 = B.fAId_2, fAName = E.fAName };
+
             //說明:ShoppinCar.cshtml套用_LayoutMember.cshtml，view套用orderDetails模型
             //return View("ShoppingCar", "_LayoutMember", orderDetails);  
-            var shoppingcarModel = temp.ToList(); 
+            var shoppingcarModel = temp.ToList();
             return View("ShoppingCar", "_LayoutMember", shoppingcarModel);
 
         }
 
-        //功能:加入購物車_表單
-        //public class tFormModel
-        //{
-        //    public int fFUserId { get; set; }
-        //    public int fFPId { get; set; }
-        //    public string fFSize { get; set; }
-        //    public string fFColor { get; set; }
-        //    public int fFQty { get; set; }
-        //}
 
 
         //說明:加入購物車
-        public ActionResult AddCar(int fPId)
+        public ActionResult AddCar(int fPId, string fSize, string fColor, int fQty)
         {
             //說明:取得會員帳號並指定給fUserId
             string fUserId = (Session["Member"] as tMember).fUserId;
@@ -157,7 +148,9 @@ namespace ShoppingMail.Controllers
                 orderDetail.fPId = fPId;
                 orderDetail.fName = product.fName;
                 orderDetail.fPrice = product.fPrice;
-                orderDetail.fQty = 1;
+                orderDetail.fSize = fSize;
+                orderDetail.fColor = fColor;
+                orderDetail.fQty = fQty;
                 orderDetail.fIsApproved = "否";
                 db.tOrderDetail.Add(orderDetail);
             }
@@ -309,12 +302,12 @@ namespace ShoppingMail.Controllers
                 //說明:找到爸爸
                 if (ba.Id == item.fParent_Id)
                 {
-                    ba.subdir.Add(smallTree_2);                    
+                    ba.subdir.Add(smallTree_2);
                 }
                 //說明:這層沒有找到，利用遞迴繼續往下層找
                 else
                 {
-                    findFather(ba.subdir,item,smallTree_2);
+                    findFather(ba.subdir, item, smallTree_2);
                 }
             }
             return result2;
@@ -338,15 +331,15 @@ namespace ShoppingMail.Controllers
                 }
                 //說明:有父層
                 else
-                {                    
+                {
                     var smallTree_2 = new tTree();
                     smallTree_2.name = item.fName;
                     smallTree_2.Id = item.Id;
                     smallTree_2.Parent_Id = item.fParent_Id;
                     smallTree_2.subdir = new List<tTree>();
-                    result2 = findFather(result2,item,smallTree_2);
-                }                
-            }      
+                    result2 = findFather(result2, item, smallTree_2);
+                }
+            }
             return result2;
         }
 
@@ -367,9 +360,9 @@ namespace ShoppingMail.Controllers
         public JsonResult Getnodemodel(int nodeId)
         {
             //說明:找出同分類節點的集合
-            var nodeModel = db.tProduct.Where(m => m.fCategory == nodeId).OrderByDescending(m => m.fId).ToList();                   
+            var nodeModel = db.tProduct.Where(m => m.fCategory == nodeId).OrderByDescending(m => m.fId).ToList();
             return Json(nodeModel, JsonRequestBehavior.AllowGet);
-            
+
         }
 
 
@@ -381,9 +374,9 @@ namespace ShoppingMail.Controllers
             //var test = db.tProduct.Select(p => new { id = p.fCategory, name = p.fName } );
 
             var model = from A in db.tProduct
-            join B in db.tProductStock on A.fPId equals B.fPId
-            orderby A.fPId
-            select new { fId = A.fId, fName = A.fName, fPrice = A.fPrice, fP_islike = A.fP_islike, fQty = B.fQty, fImg = A.fImg };
+                        join B in db.tProductStock on A.fPId equals B.fPId
+                        orderby A.fPId
+                        select new { fId = A.fId, fName = A.fName, fPrice = A.fPrice, fP_islike = A.fP_islike, fQty = B.fQty, fImg = A.fImg };
 
             return Json(model, JsonRequestBehavior.AllowGet);
         }
@@ -407,7 +400,7 @@ namespace ShoppingMail.Controllers
                 });
                 //說明:增加商品的按讚數
                 var like = db.tProduct.FirstOrDefault(x => x.fPId == pid).fP_islike;
-                if (like == null) 
+                if (like == null)
                 {
                     like = 0;
                 }
@@ -426,7 +419,7 @@ namespace ShoppingMail.Controllers
                     dislike = 0;
                 }
                 dislike -= 1;
-               
+
                 db.tProduct.FirstOrDefault(x => x.fPId == pid).fP_islike = dislike;
             }
             db.SaveChanges();
@@ -435,7 +428,28 @@ namespace ShoppingMail.Controllers
             return Json(likenum, JsonRequestBehavior.AllowGet);
         }
 
-        
+        //功能:建立產品新增頁面
+        //GET:ComplexBind
+        public ActionResult Create() 
+        {
+            return View();
+        }
+        //功能:建立產品新增頁面(複雜模型繫結)
+        [HttpPost]
+        public ActionResult Create(ProductModel product)
+        {
+            ViewBag.Id = product.Id;
+            ViewBag.CategoryId = product.CategoryId;
+            ViewBag.Name = product.Name;
+            ViewBag.SupplierName = product.SupplierName;
+            ViewBag.Description = product.Description;
+            ViewBag.Stock = product.Stock;
+            ViewBag.Price = product.Price;
+            ViewBag.Img = product.Img;
+            return View();
+
+        }
+
     }
 
 }

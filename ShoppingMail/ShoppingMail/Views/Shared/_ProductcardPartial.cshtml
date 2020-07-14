@@ -27,8 +27,9 @@
             //功能:加入購物車
             $('a[name = "addShoppingcar"]').on('click', function (e) {
                 var fPId = $(this).data('addcar');
-                //var temp = $(this).data('addcar').parent();
-                //console.log(temp);
+                var fSize = $(this).siblings()[3].firstElementChild.value;
+                var fColor = $(this).siblings()[4].firstElementChild.value;
+                var fQty = $(this).siblings()[5].firstElementChild.value;
 
                 swal({
                     title: "加入購物車",
@@ -41,7 +42,7 @@
                 }).then(function (isConfirm) {
                     if (isConfirm) {
                         swal("確定", "加入成功!", "success");
-                        addCar(fPId);
+                        addCar(fPId,fSize,fColor,fQty);
                         
                         var num = parseInt(document.getElementById("showShoppingcarnum").innerText);
                         num += 1;
