@@ -431,102 +431,6 @@ namespace ShoppingMail.Controllers
             return Json(likenum, JsonRequestBehavior.AllowGet);
         }
 
-        public class ItemModel
-        {
-
-            protected int _id, _categoryid, _parentCategory_Id, _price;
-            protected string _name, _suppliername, _description, _img;
-
-            public int Id
-            {
-                get { return _id; }
-                set
-                {
-                    if (_id >= 0)
-                    {
-                        _id = value;
-                    }
-                }
-            }
-            public int CategoryId
-            {
-                get { return _categoryid; }
-                set
-                {
-                    if (_categoryid >= 0)
-                    {
-                        _categoryid = value;
-                    }
-                }
-            }
-            public int ParentCategory_Id
-            {
-                get { return _parentCategory_Id; }
-                set
-                {
-                    if (_parentCategory_Id >= 0)
-                    {
-                        _parentCategory_Id = value;
-                    }
-                }
-            }
-            public string Name
-            {
-                get { return _name; }
-                set { _name = value; }
-            }
-            public string SupplierName
-            {
-                get { return _suppliername; }
-                set { _suppliername = value; }
-            }
-            public string Description
-            {
-                get { return _description; }
-                set { _description = value; }
-            }
-            public int Price
-            {
-                get { return _price; }
-                set
-                {
-                    if (_price >= 0)
-                    {
-                        _price = value;
-                    }
-                }
-            }
-            public string Img
-            {
-                get { return _img; }
-                set { _img = value; }
-            }
-
-        }
-
-        public class ProductModel : ItemModel, ICalculateQty
-        {
-            protected int _stock;
-            public int Stock
-            {
-                get { return _stock; }
-                set
-                {
-                    if (_stock >= 0)
-                    {
-                        _stock = value;
-                    }
-                }
-            }
-
-            public int CalculateQty()
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-
-
         //功能:建立產品新增頁面
         //GET:ComplexBind
         public ActionResult Create() 
@@ -535,27 +439,19 @@ namespace ShoppingMail.Controllers
         }
         //功能:建立產品新增頁面(複雜模型繫結)
         [HttpPost]
-        public ActionResult Create(ProductModel product,HttpPostedFileBase photo)
+        public ActionResult Create(ProductModel_2 product,HttpPostedFileBase photo)
         {
-            //tProductModel temp = new tProductModel();
-            //temp.Id = product.Id;
-            //temp.CategoryId = product.CategoryId;
-            //temp.ParentCategoryId = product.ParentCategory_Id;
-            //temp.Name = product.Name;
-            //temp.SupplierName = product.SupplierName;
-            //temp.Description = product.Description;
-            //temp.Stock = product.Stock;
-            //temp.Price = product.Price;
-            //db.tProductModel.Add(temp);
-
-            ViewBag.Id = product.Id;
-            ViewBag.CategoryId = product.CategoryId;
-            ViewBag.ParentCategory_Id = product.ParentCategory_Id;
-            ViewBag.Name = product.Name;
-            ViewBag.SupplierName = product.SupplierName;
-            ViewBag.Description = product.Description;
-            ViewBag.Stock = product.Stock;
-            ViewBag.Price = product.Price;
+            ProductModel temp = new ProductModel();
+            
+            temp.CategoryId = product.CategoryId;
+            temp.ParentCategoryId = product.ParentCategory_Id;
+            temp.Name = product.Name;
+            temp.SupplierName = product.SupplierName;
+            temp.Description = product.Description;
+            temp.Stock = product.Stock;
+            temp.Price = product.Price;
+            temp.Img = product.Name + "_0.jfif";
+            db.ProductModel.Add(temp);           
 
             //說明: 檔案上傳
             //
@@ -570,13 +466,12 @@ namespace ShoppingMail.Controllers
                 }
             }
 
-            //db.SaveChanges();
-
+            db.SaveChanges();
             //說明:顯示目前新增哪些商品照片
             return RedirectToAction("ShowPhotos");
             
-            //return View();
         }
+
         public string ShowPhotos() 
         {
             string show = "";
@@ -599,9 +494,15 @@ namespace ShoppingMail.Controllers
             show += "<p><a href='Create'>返回商品新增頁面</a></p>";
             return show;
         }
+        public ActionResult Product()
+        {
+            var allproduct= db.ProductModel.ToList();
+            return View("Product", "_Layout", allproduct);
+            
+        }
 
 
-    
+
 
 
 

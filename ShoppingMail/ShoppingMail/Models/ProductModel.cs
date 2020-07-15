@@ -12,24 +12,16 @@ namespace ShoppingMail.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ProductModel:ItemModel,ICalculateQty
+    public partial class ProductModel
     {
-        protected int _stock;
-        public int Stock
-        {
-            get { return _stock; }
-            set
-            {
-                if (_stock >= 0)
-                {
-                    _stock = value;
-                }
-            }
-        }
-
-        public int CalculateQty()
-        {
-            throw new NotImplementedException();
-        }
+        public int Id { get; set; }
+        public Nullable<int> CategoryId { get; set; }
+        public Nullable<int> ParentCategoryId { get; set; }
+        public string Name { get; set; }
+        public string SupplierName { get; set; }
+        public string Description { get; set; }
+        public Nullable<int> Price { get; set; }
+        public string Img { get; set; }
+        public int Stock { get; set; }
     }
 }

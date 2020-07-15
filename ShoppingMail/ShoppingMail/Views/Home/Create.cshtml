@@ -7,7 +7,7 @@
 
 <form method="post" action="@Url.Action("Create")" enctype="multipart/form-data">
     <div>
-        <p>商品編號:<input type="text" name="Id" id="Id" value="@ViewBag.Id" @*required*@ /></p>
+        @*<p>商品編號:<input type="text" name="Id" id="Id" value="@ViewBag.Id" required /></p>*@
         <p>商品類別:<input type="text" name="CategoryId" id="CategoryId" value="@ViewBag.CategoryId" @*required*@ /></p>
         <p>商品父類別:<input type="text" name="ParentCategory_Id" id="ParentCategory_Id" value="@ViewBag.ParentCategory_Id" @*required*@ /></p>
         <p>商品名稱:<input type="text" name="Name" id="Name" value="@ViewBag.Name" @*required*@ /></p>
@@ -22,7 +22,6 @@
         <div>
             <input type="file" name="Photo" id="Photo" />
         </div>
-
 
         <p><input type="submit" value="新增" /></p>
         <hr />
@@ -39,5 +38,12 @@
 </form>
 
 
-
-<script>CKEDITOR.replace("editor");</script>
+<script>
+    CKEDITOR.replace("editor");
+    //說明:取得編輯器文字內容
+    function processData() {
+        // getting data       
+        var data = CKEDITOR.instances["editor"].getData();
+        alert(data);
+    }
+</script>

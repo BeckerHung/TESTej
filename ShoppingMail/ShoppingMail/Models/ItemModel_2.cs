@@ -5,11 +5,8 @@ using System.Web;
 
 namespace ShoppingMail.Models
 {
-   
-
-    public  class ItemModel_2
+    public class ItemModel_2
     {
-
         protected int _id, _categoryid, _parentCategory_Id, _price;
         protected string _name, _suppliername, _description, _img;
 
@@ -77,6 +74,5 @@ namespace ShoppingMail.Models
             get { return _img; }
             set { _img = value; }
         }
-
     }
 }

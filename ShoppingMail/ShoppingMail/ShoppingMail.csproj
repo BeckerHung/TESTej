@@ -151,20 +151,16 @@
     <Compile Include="Models\ItemModel.cs">
       <DependentUpon>dbShoppingMailModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ItemModel_2.cs" />
     <Compile Include="Models\ProductModel.cs">
       <DependentUpon>dbShoppingMailModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProductModel_2.cs" />
     <Compile Include="Models\Shoppingcarmodel.cs" />
     <Compile Include="Models\tAttributes.cs">
       <DependentUpon>dbShoppingMailModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tExchangeRate.cs">
-      <DependentUpon>dbShoppingMailModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\ThumbsUp.cs">
-      <DependentUpon>dbShoppingMailModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tItemModel.cs">
       <DependentUpon>dbShoppingMailModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tMember.cs">
@@ -180,9 +176,6 @@
       <DependentUpon>dbShoppingMailModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tProductCategory.cs">
-      <DependentUpon>dbShoppingMailModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tProductModel.cs">
       <DependentUpon>dbShoppingMailModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tProductProperty.cs">
@@ -234,7 +227,6 @@
       <LastGenOutput>dbShoppingMailModel.Context.cs</LastGenOutput>
       <DependentUpon>dbShoppingMailModel.edmx</DependentUpon>
     </Content>
-    <Content Include="Models\dbShoppingMailModel.edmx.sql" />
     <Content Include="Models\dbShoppingMailModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>dbShoppingMailModel.edmx</DependentUpon>
@@ -293,10 +285,10 @@
     <Content Include="Views\Shared\_Sidebar %281%29.cshtml" />
     <Content Include="Views\Home\GetCategory.cshtml" />
     <Content Include="Views\Shared\_ProductcardPartial.cshtml" />
-    <Content Include="Views\Shared\_testPartial.cshtml" />
     <Content Include="Views\Shared\_CardPartial.cshtml" />
     <Content Include="Views\Home\Create.cshtml" />
     <Content Include="Views\Home\ShowProduct.cshtml" />
+    <Content Include="Views\Home\Product.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Photos\" />

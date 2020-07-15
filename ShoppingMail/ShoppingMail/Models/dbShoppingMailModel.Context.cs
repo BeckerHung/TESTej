@@ -31,7 +31,6 @@ namespace ShoppingMail.Models
         public virtual DbSet<tProductCategory> tProductCategory { get; set; }
         public virtual DbSet<tProductProperty> tProductProperty { get; set; }
         public virtual DbSet<ThumbsUp> ThumbsUp { get; set; }
-        public virtual DbSet<tExchangeRate> tExchangeRate { get; set; }
         public virtual DbSet<tAttributes> tAttributes { get; set; }
         public virtual DbSet<tProductStock> tProductStock { get; set; }
         public virtual DbSet<tProduct> tProduct { get; set; }
