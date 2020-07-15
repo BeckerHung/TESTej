@@ -14,22 +14,19 @@
         type: "GET",
         cache: false,
         success: function (model) {
-            console.log(model);
+            //說明:將後端取到的JSON傳至前端長出卡片
             var html_2 = createCard(model);
             $("#productcard").html(html_2);
-            $('img[name="bighand"]').on('dblclick', function (e)
-            {
-                like($(this).data('imgid'));
-                showpicture();
-            });
-            //功能:加入購物車
+            //功能:將商品加入購物車
+            //說明:每次加入購物車數量為1，可重複加入，加入時頁面不跳轉
+            //說明:點選導航列購物車圖示可察看目前加入商品
             $('a[name = "addShoppingcar"]').on('click', function (e) {
+                //說明:利用自定義屬性取得fId
                 var fId = $(this).data('addcar');
                 addCar(fId);
                 var num = parseInt(document.getElementById("showShoppingcarnum").innerText);
                 num += 1;
-                document.getElementById("showShoppingcarnum").innerText = num;
-                
+                document.getElementById("showShoppingcarnum").innerText = num;                
             });
 
          },
@@ -55,7 +52,6 @@
      });
     }
 
-
 </script>
 
 
@@ -68,161 +64,34 @@
 
             html_2 += '<div class="col-xs-3-fix">';
             html_2 += '<div class="card product-item-main" style="width: 18rem;" >';
-            //說明:對卡片做click綁定
+            //說明:顯示商品圖片
             html_2 += '<img src="' + root + 'Images/' + item.fImg + '" style="width:100%" name="bighand" data-imgid="' + item.fId + '" class="btn" /*onclick="like(' + item.fId + ')"*//>';
-            //說明:星星
+            //說明:顯示星星
             html_2 += '<div class="rating-input grey-bg" align="right">'
             html_2 += '<span class="glyphicon glyphicon-star" data-value="1"></span>'
             html_2 += '<span class="glyphicon glyphicon-star" data-value="2"></span>'
             html_2 += '<span class="glyphicon glyphicon-star" data-value="3"></span>'
             html_2 += '<span class="glyphicon glyphicon-star" data-value="4"></span>'
             html_2 += '<span class="glyphicon glyphicon-star" data-value="5"></span>'
+            //說明:顯示喜歡人數
             html_2 += '<span class="badge marginright5"> <p name="showlike" >' + item.fP_islike + '</p> </span>'
             html_2 += '</div>'
             html_2 += '<div class="card-body chapter-content">';
             html_2 += '<h3 class="chapter-content-blue">' + item.fName + '</h3>'
             html_2 += '<h4 class="card-title">' + item.fName + '</h4>';           
-            html_2 += '<span class="eye" title="瀏覽數">100</span>';
-            //html_2 +='<span class="money" title="價格" >免費</span>'     
+            html_2 += '<span class="eye" title="瀏覽數">100</span>';  
             html_2 += '</div>';          
             html_2 += '<div class="card-footer bg-white border-top-0">';
-            //說明:加入購物車
-            html_2 += '<a class="btn cloud btn-block-add " name="addShoppingcar" data-addcar="' + item.fId + '">加入購物車</a>';          
+            //說明:加入購物車按鈕
+            html_2 += '<a class="btn chapter-content-blue " name="addShoppingcar" data-addcar="' + item.fId + '">加入購物車</a>';          
             html_2 += '</div>';
             html_2 += '</div>';
-            html_2 += '</div>';
-           
+            html_2 += '</div>';        
         })
         return html_2;
     }
 </script>
-<style>
-    .product-item-main {
-        box-shadow: 3px 3px 5px rgba(0,0,0,0.6);
-        background: #fff;
-        bottom: 5px;
-        height: 360px;
-        left: 5px;
-        overflow: hidden;
-        position: relative;
-        padding: 0;
-        right: 5px;
-        top: 5px;
-        width: 100%;
-        -moz-box-shadow: 3px 3px 5px rgba(0,0,0,0.6);
-        -webkit-box-shadow: 3px 3px 5px rgba(0,0,0,0.6);
-        -webkit-border-radius: 20px;
-        -moz-border-radius: 20px;
-        border-radius: 20px;
-        z-index: 99;
-        behavior: url(/PIE.htc);
-        line-height: normal;
-        font-size: 10pt;
-    }
 
-
-    .chapter-content {
-        color: #808080;
-        font-weight: 500;
-        width: 100%;
-    }
-
-    .chapter-content h3 {
-            font-size: 13pt !important;
-            margin: 0 !important;
-        }
-    .chapter-content h3 {
-            background: #fff;
-            color: #fff;
-            display: block;
-            overflow: hidden;
-            padding: 5px 0;
-            text-align: center;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-    .chapter-content-blue {
-        background: #5ebee2 !important;
-        background: -webkit-linear-gradient(#4888c3, #5ebee2) !important;
-        background: -o-linear-gradient(#4888c3, #5ebee2) !important;
-        background: -ms-linear-gradient(#4888c3, #5ebee2) !important;
-        background: linear-gradient(#4888c3, #5ebee2) !important;
-    }
-
-
-
-    .col-xs-3-fix {
-        position: relative;
-        min-height: 1px;
-        width: 220px;
-        /* margin: 0 1.3%; */
-        z-index: 99;
-        color: #eee;
-    }
-
-    .rating-input.grey-bg {
-        line-height: normal;
-    }
-
-    .glyphicon:empty {
-        width: 1em;
-    }
-
-    .glyphicon-star {
-        color: rgb(255, 165, 0);
-    }
-
-    .glyphicon {
-        position: relative;
-        top: 1px;
-        display: inline-block;
-        font-family: 'Glyphicons Halflings';
-        -webkit-font-smoothing: antialiased;
-        font-style: normal;
-        font-weight: normal;
-        line-height: 1;
-        -moz-osx-font-smoothing: grayscale;
-    }
-    .eye {
-        background: url(../../Photos/eye.svg) left center no-repeat;
-        margin-left: 7%;
-        padding-left: 19px;
-        display: block;
-        float: left;
-        cursor: pointer;
-    }
-    .cloud {
-        color: #fff;
-        background-color: #5bc0de;
-    }
-
-    .btn-block-add {
-        width: 100%;
-        padding: 5px 0px 5px 0px;
-        margin-top: 10px;
-        font-weight: normal;
-        line-height: 1.428571429;
-        text-align: center;
-        white-space: nowrap;
-        vertical-align: middle;
-        cursor: pointer;
-        background-image: none;
-        border: 1px solid transparent;
-    }
-   
-    h1, h2, h3, h4, h5, h6, p {
-        font-family: \5FAE\8EDF\6B63\9ED1\9AD4, Microsoft JhengHei, MingLiU, sans-serif;
-    }
-
-    h4, .h4 {
-        font-size: 20px;
-    }
-
-    h4, h5, h6 {
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
-</style>
 
 
 

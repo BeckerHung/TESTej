@@ -19,7 +19,7 @@ namespace ShoppingMail.Models
                 }
             }
         }
-
+        //備註:尚未實作計算庫存方法
         public int CalculateQty()
         {
             throw new NotImplementedException();

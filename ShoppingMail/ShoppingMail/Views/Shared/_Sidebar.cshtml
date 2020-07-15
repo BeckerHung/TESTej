@@ -22,7 +22,6 @@
                 //(1)點擊事件綁定:從_Sidebar樹狀結構<a>標籤中的data-group屬性值判斷點擊到哪個節點
                 //(2)getCategorynode():分類節點利用ajax到後端取得對應的model
                 //(3)GetSidebarnode():將從後端傳至前端，利用createCard長出html
-
                 $('a[name = "sidebar"]').on('click', function (e) {
                     $("#productcard").empty();
                     //說明:取得對應節點值
@@ -30,7 +29,6 @@
                     //說明:長出該節點(model)的cards view
                     getCategorynode(nodeId);                                
                 });
-
             },
             error: function (jqXHR, exception) {
                 var msg = '';

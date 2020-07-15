@@ -100,13 +100,11 @@ namespace ShoppingMail.Controllers
             Session.Clear();
             return RedirectToAction("Index");
         }
-
-
-        
+  
         //說明:處理訂單
         //Post:Index/ShoppingCar
         [HttpPost]
-        public ActionResult ShoppingCar(string fReceiver, string fEmail/*, string fAddress*/)
+        public ActionResult ShoppingCar(string fReceiver, string fEmail)
         {
             //說明:取得會員帳號並指定給fUserId
             string fUserId = (Session["Member"] as tMember).fUserId;
@@ -290,7 +288,7 @@ namespace ShoppingMail.Controllers
             }
             return result2;
         }
-
+        //20200715
 
         //功能:無窮選單_傳送分類資料至前端
         [HttpGet]
@@ -315,7 +313,6 @@ namespace ShoppingMail.Controllers
         [HttpGet]
         public JsonResult GetProductcards()
         {
-
             var model = from A in db.tProduct
                         join B in db.tProductStock on A.fPId equals B.fPId
                         orderby A.fPId
@@ -331,12 +328,12 @@ namespace ShoppingMail.Controllers
         {
             return View();
         }
-        //功能:建立產品新增頁面(複雜模型繫結)
+
+        //功能:建立產品新增頁面
         [HttpPost]
         public ActionResult Create(ProductModel_2 product,HttpPostedFileBase photo)
         {
-            ProductModel temp = new ProductModel();
-            
+            ProductModel temp = new ProductModel();   
             temp.CategoryId = product.CategoryId;
             temp.ParentCategoryId = product.ParentCategory_Id;
             temp.Name = product.Name;
@@ -347,25 +344,25 @@ namespace ShoppingMail.Controllers
             temp.Img = product.Name + "_0.jfif";
             db.ProductModel.Add(temp);           
 
-            //說明: 檔案上傳
-            //
-            if (photo != null)  //檔案不為null
+            //功能:檔案上傳
+            if (photo != null)  
             {
                 string fileName = "";
-                if (photo.ContentLength > 0) //檔案大小>0 
+                //說明:判斷檔案大小
+                if (photo.ContentLength > 0)
                 {
-                    fileName = Path.GetFileName(photo.FileName); //說明:取得檔名
+                    //說明:取得檔名
+                    fileName = Path.GetFileName(photo.FileName); 
                     var path = Path.Combine(Server.MapPath("~/Photos"), fileName);
                     photo.SaveAs(path);
                 }
             }
-
             db.SaveChanges();
             //說明:顯示目前新增哪些商品照片
-            return RedirectToAction("ShowPhotos");
-            
+            return RedirectToAction("ShowPhotos");       
         }
 
+        //功能:展示目前已上傳那些商品圖片
         public string ShowPhotos() 
         {
             string show = "";
@@ -383,40 +380,42 @@ namespace ShoppingMail.Controllers
                 {
                     show += "<p>";
                 }
-
             }
             show += "<p><a href='Create'>返回商品新增頁面</a></p>";
             return show;
         }
+        //功能:展示商品列表
         public ActionResult Product()
         {
+            //說明:讀取資料庫所有商品至allproduct
             var allproduct= db.ProductModel.ToList();
-            return View("Product", "_Layout", allproduct);
+            //說明://說明:Product.cshtml套用_LayoutMember.cshtml，view套用allproduct模型
+            return View("Product", "_LayoutMember", allproduct);
             
         }
 
-        //說明:顯示購物車
+        //功能:顯示購物車
         public ActionResult ShoppingCar()
         {
             //說明:取得會員帳號並指定給fUserId
             string fUserId = (Session["Member"] as tMember).fUserId;
             //說明:找出未成為訂單明細的資料(購物車內容)
             var orderDetails = db.tOrderDetail.Where(m => m.fUserId == fUserId && m.fIsApproved == "否").ToList();
-            //說明:viewmodel測試
+            //說明:使用LINQ方式join多張資料表
             var temp = from A in db.tProduct
                        join B in db.tProductStock on A.fPId equals B.fPId
                        join C in db.tOrderDetail on A.fPId equals C.fPId
                        join D in db.tMember on C.fUserId equals D.fUserId
                        join E in db.tAttributes on B.fPId equals E.Id
                        orderby A.fPId
-                       //說明:動態型別
-                       //select new { fPId = C.fId, fPName = A.fName, fPrice = A.fPrice, fQty = B.fQty, fImg = A.fImg, fColor = B.fAId_1,fSize=B.fAId_2,fOrderQty = C.fQty, fUserId = D.fId};
-                       select new Shoppingcarmodel { fOrderId = C.fOrderId, fUserId = C.fUserId, fPId = C.fPId, fPName = C.fName, fPrice = A.fPrice, fMaxQty = B.fQty, fOrderQty = C.fQty, fImg = A.fImg, fChangeQTY = A.fChangeQTY, fSupplyLimit = B.fSupplyLimit, fAId_1 = B.fAId_1, fAId_2 = B.fAId_2, fAName = E.fAName };
-
-            //說明:ShoppinCar.cshtml套用_LayoutMember.cshtml，view套用orderDetails模型
+                       //說明:動態型別                     
+                       select new Shoppingcarmodel
+                       { fOrderId = C.fOrderId, fUserId = C.fUserId, fPId = C.fPId, fPName = C.fName, fPrice = A.fPrice,
+                           fMaxQty = B.fQty, fOrderQty = C.fQty, fImg = A.fImg, fChangeQTY = A.fChangeQTY,
+                           fSupplyLimit = B.fSupplyLimit, fAId_1 = B.fAId_1, fAId_2 = B.fAId_2, fAName = E.fAName };          
             var shoppingcarModel = temp.ToList();
+            //說明:ShoppinCar.cshtml套用_LayoutMember.cshtml，view套用shoppingcarModel模型
             return View("ShoppingCar", "_LayoutMember", shoppingcarModel);
-
         }
 
         //說明:加入購物車
@@ -435,7 +434,7 @@ namespace ShoppingMail.Controllers
                 var product = db.tProduct
                     .Where(m => m.fId == fId)
                     .FirstOrDefault();
-                //說明:將產品放入購物車表單
+                //說明:將產品放入訂單明細
                 tOrderDetail orderDetail = new tOrderDetail();
                 orderDetail.fUserId = fUserId;
                 orderDetail.fPId = fId;
@@ -450,10 +449,7 @@ namespace ShoppingMail.Controllers
                 currentCar.fQty += 1;
             }
             db.SaveChanges();
-            //return RedirectToAction("ShoppingCar");
             return Json(new { success = true }, JsonRequestBehavior.AllowGet);
-            // return Content("<script>alert('提示信息');history.go(-1);</script>");
-            //return null;
         }
 
         //說明:編輯(刪除)購物車
@@ -464,8 +460,6 @@ namespace ShoppingMail.Controllers
             if (fPId == null)
                 return RedirectToAction("ShoppingCar");
             //說明:依照fId找要刪除的產品
-            //var orderDetail = Shoppingcarmodel.Where(m => m.fPId == fPId).FirstOrDefault();
-
             var orderDetail = db.tOrderDetail.Where(m => m.fPId == fPId).FirstOrDefault();
             db.tOrderDetail.Remove(orderDetail);
             db.SaveChanges();
@@ -491,12 +485,6 @@ namespace ShoppingMail.Controllers
             db.SaveChanges();
             return RedirectToAction("ShoppingCar");
         }
-
-
-
-
-
-
     }
 
 }
