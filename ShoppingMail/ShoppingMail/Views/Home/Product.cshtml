@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<ShoppingMail.Models.ProductModel>
 
 @{
-    ViewBag.Title = "商品列表";
+    ViewBag.Title = "商品管理";
 }
 
     <h2>商品列表</h2>
 
     <p>
         @Html.ActionLink("新增商品", "Create")
-        @Html.ActionLink("顯示商品圖示", "ShowPhotos")
+        @Html.ActionLink("顯示目前上傳圖片", "ShowPhotos")
     </p>
 <table class="table">
     <tr>

@@ -2,20 +2,23 @@
 @model IEnumerable<ShoppingMail.Models.tProduct>
 
 @{
-    ViewBag.Title = "產品列表";
+    ViewBag.Title = "商品列表";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
 <!-- 單一產品頁面 -->
-    <div class="col-md-9">
-        <h2>選擇呈列方式</h2>
+    <div class="col-md-12">
+        <h1>
+            <img src="~/Photos/comment.svg" style="width:5%"/> 最新上架
+        </h1>
+        @*<h2>選擇呈列方式</h2>
         <div class="radio">
-            <label><input type="radio" name="Option_1" id="Option_1" @*onchange="setClass(4)*@ checked>三個一列</label>
+            <label><input type="radio" name="Option_1" id="Option_1" onchange="setClass(4) checked>三個一列</label>
         </div>
         <div class="radio">
-            <label><input type="radio" name="Option_1" id="Option_2" @*onchange="setClass(3)"*@>四個一列</label>
-        </div>
+            <label><input type="radio" name="Option_1" id="Option_2" onchange="setClass(3)">四個一列</label>
+        </div>*@
         <div class="pop">
             <img src="~/Images/大手.jpg" class="btn-pop" style="width:60%">
         </div>
