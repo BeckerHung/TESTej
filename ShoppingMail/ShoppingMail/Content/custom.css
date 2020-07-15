@@ -46,6 +46,37 @@ body {
 .alert-rounded {
     border-radius: 50px;
 }
+.nav-fixed {
+    position: fixed;
+}
+
+.tree-node {
+    padding-left: 1rem;
+}
+
+.block-500 {
+    height: 500px;
+}
+
+main {
+    padding-left: 150px;
+}
+/* 展開收合效果 */
+.slide_toggle {
+    text-align: center;
+    cursor: pointer;
+    font-weight: bold;
+    /* 收合提示字串區塊, 還可加入自訂 CSS 效果 */
+    line-height: 170%;
+    background-color: #eed;
+    border-radius: 7px;
+}
+
+    .slide_toggle + div {
+        display: none;
+        margin-top: 10px;
+        /* 隱藏註解文字區塊, 請加入自訂 CSS 效果 */
+    }
 
 
 /* 按讚test */
@@ -60,46 +91,6 @@ body {
 }
 
 
-
-/* swiper */
-html,
-body {
-    position: relative;
-    height: 60%;
-}
-
-body {
-    background: #eee;
-    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-    font-size: 14px;
-    color: #000;
-    margin: 0;
-    padding: 0;
-}
-
-.swiper-container {
-    width: 100%;
-    height: 100%;
-}
-
-.swiper-slide {
-    text-align: center;
-    font-size: 18px;
-    background: #fff;
-    /* Center slide text vertically */
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    -webkit-justify-content: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    -webkit-align-items: center;
-    align-items: center;
-}
 
 /*幣別*/
 @import url('https://fonts.googleapis.com/css?family=Muli&display=swap');

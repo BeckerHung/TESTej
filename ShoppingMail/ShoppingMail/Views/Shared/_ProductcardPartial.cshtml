@@ -17,8 +17,6 @@
             console.log(model);
             var html_2 = createCard(model);
             $("#productcard").html(html_2);
-            //功能:點商品圖兩下按讚(先放大縮小消失)
-            //說明:按讚一次有效，第二次失效!!!
             $('img[name="bighand"]').on('dblclick', function (e)
             {
                 like($(this).data('imgid'));
@@ -26,33 +24,12 @@
             });
             //功能:加入購物車
             $('a[name = "addShoppingcar"]').on('click', function (e) {
-                var fPId = $(this).data('addcar');
-                var fSize = $(this).siblings()[3].firstElementChild.value;
-                var fColor = $(this).siblings()[4].firstElementChild.value;
-                var fQty = $(this).siblings()[5].firstElementChild.value;
-
-                swal({
-                    title: "加入購物車",
-                    text: "確定加入嗎",
-                    icon: 'warning',
-                    buttons: {
-                        cancel: "取消",
-                        confirm: "確定"
-                    }
-                }).then(function (isConfirm) {
-                    if (isConfirm) {
-                        swal("確定", "加入成功!", "success");
-                        addCar(fPId,fSize,fColor,fQty);
-                        
-                        var num = parseInt(document.getElementById("showShoppingcarnum").innerText);
-                        num += 1;
-                        document.getElementById("showShoppingcarnum").innerText = num;
-                        //說明:購物車紀錄數字刷新頁面會歸零!!!
-                        //$("#showShoppingcarnum").load("/Home/Index");
-                    } else {
-                        swal("取消", "取消", 'error');
-                    }
-                });
+                var fId = $(this).data('addcar');
+                addCar(fId);
+                var num = parseInt(document.getElementById("showShoppingcarnum").innerText);
+                num += 1;
+                document.getElementById("showShoppingcarnum").innerText = num;
+                
             });
 
          },
@@ -100,83 +77,17 @@
             html_2 += '<span class="glyphicon glyphicon-star" data-value="3"></span>'
             html_2 += '<span class="glyphicon glyphicon-star" data-value="4"></span>'
             html_2 += '<span class="glyphicon glyphicon-star" data-value="5"></span>'
-            html_2 += '<span class="badge marginright5">' + item.fP_islike + '</span>'
+            html_2 += '<span class="badge marginright5"> <p name="showlike" >' + item.fP_islike + '</p> </span>'
             html_2 += '</div>'
             html_2 += '<div class="card-body chapter-content">';
             html_2 += '<h3 class="chapter-content-blue">' + item.fName + '</h3>'
-            html_2 += '<h4 class="card-title">' + item.fName + '</h4>';
-            //html_2 += '<p>售價:' + item.fPrice + '</p>';
-            //說明:按讚小手
-            //html_2 += '<div><img src="' + root + 'Images/小手.jpg" class="like text-right" style="width:30%" onclick="like(' + item.fId + ')"/>';
-            //說明:顯示按讚數
-            //html_2 += '<p name="showlike" >按讚數:' + item.fP_islike + '</p></div>';
-            html_2 += '<div><span class="eye" title="瀏覽數"> 1,131  </span></div>';
-            //html_2 +='<span class="money" title="價格" >免費</span>'
-            html_2 += '</div>';
+            html_2 += '<h4 class="card-title">' + item.fName + '</h4>';           
+            html_2 += '<span class="eye" title="瀏覽數">100</span>';
+            //html_2 +='<span class="money" title="價格" >免費</span>'     
+            html_2 += '</div>';          
             html_2 += '<div class="card-footer bg-white border-top-0">';
-            //說明:燈箱
-            html_2 += '<button type="button" class="btn cloud btn-block-add " data-toggle="modal" data-target="#openlightbox' + item.fId + '">線上課程</button>';
-            html_2 += '<div class="modal fade" id="openlightbox' + item.fId + '" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">';
-            html_2 += '<div class="modal-dialog">';
-            html_2 += '<div class="modal-content">';
-            html_2 += '<div class="modal-header">';
-            //說明:燈箱標題
-            html_2 += '<h3 class="modal-title" id="staticBackdropLabel">' + item.fName + '</h3>';
-            html_2 += '<button type="button" class="close" data-dismiss="modal" aria-label="Close">';
-            html_2 += '<span aria-hidden="true">&times;</span>';
-            html_2 += '</button>';
-            html_2 += '</div>';
-            //說明:燈箱內容
-            html_2 += '<div class="modal-body">'
-            //功能:商品多圖片切換
-            html_carousel = '';
-            html_carousel += '<div id="carouselExampleIndicators' + item.fId + '" class="carousel slide" data-ride="carousel">';
-            html_carousel += '<ol class="carousel-indicators">';
-            html_carousel += '<li data-target="#carouselExampleIndicators' + item.fId + '" data-slide-to="0" class="active"></li>';
-            html_carousel += '<li data-target="#carouselExampleIndicators' + item.fId + '" data-slide-to="1"></li>';
-            html_carousel += '<li data-target="#carouselExampleIndicators' + item.fId + '" data-slide-to="2"></li>';
-            html_carousel += '</ol>';
-            html_carousel += '<div class="carousel-inner">';
-            html_carousel += '<div class="carousel-item active"><img src="' + root + 'Images/' + item.fName + '_0.jfif " class="d-block w-100" alt="圖片1"></div>';
-            html_carousel += '<div class="carousel-item"><img src="' + root + 'Images/' + item.fName + '_1.jfif " class="d-block w-100" alt="圖片2"></div>';
-            html_carousel += '<div class="carousel-item"><img src="' + root + 'Images/' + item.fName + '_2.jfif " class="d-block w-100" alt="圖片3"></div>';
-            html_carousel += '</div>';
-            html_carousel += '</div>';
-            html_2 += html_carousel;
-            //說明:下拉商品描述
-            html_2 += '<div>商品描述</div>'
-            html_2 += '<div style="height: 100px; width: 450px; border: 1px solid #ccc; font: 16px / 26px Georgia, Garamond, Serif; overflow: auto;">';
-            html_2 += "As you can see, once there's enough text in this box, the box will grow scroll bars...that's why we call it a scroll box! You could also place an image into the scroll box.";
-            html_2 += "As you can see, once there's enough text in this box, the box will grow scroll bars...that's why we call it a scroll box! You could also place an image into the scroll box.";
-            html_2 += '</div>';
-            //說明:選擇尺寸
-            html_2 += '尺寸';
-            html_2 += '<a class="btn-secondary" data-th="Size"> <select name="" id="fSize" class="form-control mr-1">';
-            html_2 += '<option value="S">S</option><option value="M">M</option><option value="L">L</option>';
-            html_2 += '</select></a>';
-            //說明:選擇顏色
-            html_2 += '顏色';
-            html_2 += '<a class="cart-label" data-th="Color"> <select name="" id="fColor" class="form-control mr-1">';
-            html_2 += '<option value="r">紅色</option><option value="w">白色</option><option value="b">黑色</option>';
-            html_2 += '</select></a>';
-            //說明:選擇數量
-            html_2 += '數量'
-            html_2 += '<div class="cart-label" data-th="Quantity">';
-            html_2 += '<input type = "number"  id="fQty" value="1" max = "' + item.fQty + '" min = "1" >';    
-            html_2 += '</div>';
             //說明:加入購物車
-            html_2 += '<a class="btn btn-light" name="addShoppingcar" data-addcar="' + item.fId + '"> 加入購物車</a>';
-            html_2 += '</div>';
-            //說明:燈箱下方
-            html_2 += '<div class="modal-footer">';
-            //說明:加入購物車
-            //html_2 += '<a class="btn btn-light" name="addShoppingcar" data-addcar="' + item.fId + '"> 加入購物車</a>';
-            html_2 += '<p>提醒:此商品供貨上限為' + item.fQty + '</p>';
-            html_2 += '</div>';        
-            html_2 += '</div>';
-            html_2 += '</div>';
-            html_2 += '</div>';
-            //說明:燈箱
+            html_2 += '<a class="btn cloud btn-block-add " name="addShoppingcar" data-addcar="' + item.fId + '">加入購物車</a>';          
             html_2 += '</div>';
             html_2 += '</div>';
             html_2 += '</div>';
@@ -204,7 +115,6 @@
         -moz-border-radius: 20px;
         border-radius: 20px;
         z-index: 99;
-        background-image: url(../../image/item/empty.gif);
         behavior: url(/PIE.htc);
         line-height: normal;
         font-size: 10pt;
