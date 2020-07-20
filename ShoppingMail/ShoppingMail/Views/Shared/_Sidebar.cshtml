@@ -1,54 +1,9 @@
 ﻿
+
 @*左側選單*@
 
-<div class="col-md-2" id="sidebar"></div>
+<div class="col-md-2" id="sidebar">
+  
+</div>
 
-<script>
 
-    //功能:從後端取得資料長出樹狀結構
-    function setProductCategoryMenu() {
-        $.ajax({
-            url: '@Url.Action("GetCategory", "Home")',
-            type: "GET",
-            cache: false,
-            async: false,
-            success: function (result2) {                
-                console.log(result2);
-                var html = createList(result2, 0);
-                $("#sidebar").html(html);
-
-                //功能:點節點長出對應的cardsview
-                //說明:
-                //(1)點擊事件綁定:從_Sidebar樹狀結構<a>標籤中的data-group屬性值判斷點擊到哪個節點
-                //(2)getCategorynode():分類節點利用ajax到後端取得對應的model
-                //(3)GetSidebarnode():將從後端傳至前端，利用createCard長出html
-                $('a[name = "sidebar"]').on('click', function (e) {
-                    $("#productcard").empty();
-                    //說明:取得對應節點值
-                    var nodeId = $(this).data('group')                   
-                    //說明:長出該節點(model)的cards view
-                    getCategorynode(nodeId);                                
-                });
-            },
-            error: function (jqXHR, exception) {
-                var msg = '';
-                if (jqXHR.status === 0) {
-                    msg = 'Not connect.\n Verify Network.';
-                } else if (jqXHR.status === 404) {
-                    msg = 'Requested page not found. [404]';
-                } else if (jqXHR.status === 500) {
-                    msg = 'Internal Server Error [500].';
-                } else if (exception === 'parsererror') {
-                    msg = 'Requested JSON parse failed.';
-                } else if (exception === 'timeout') {
-                    msg = 'Time out error.';
-                } else if (exception === 'abort') {
-                    msg = 'Ajax request aborted.';
-                } else {
-                    msg = 'Uncaught Error.\n' + jqXHR.statusText;
-                }
-                alert(msg);
-            }
-        });
-    }
-</script>

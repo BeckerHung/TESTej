@@ -36,5 +36,6 @@ namespace ShoppingMail.Models
         public virtual DbSet<tProduct> tProduct { get; set; }
         public virtual DbSet<ItemModel> ItemModel { get; set; }
         public virtual DbSet<ProductModel> ProductModel { get; set; }
+        public virtual DbSet<tShoppingcarmodel> tShoppingcarmodel { get; set; }
     }
 }

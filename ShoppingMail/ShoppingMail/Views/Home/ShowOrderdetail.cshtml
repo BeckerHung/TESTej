@@ -1,0 +1,68 @@
+﻿@model IEnumerable<ShoppingMail.Models.tShoppingcarmodel>
+
+@{
+    ViewBag.Title = "ShowOrderdetail";
+    int TotalPrice = 0;
+}
+
+<h2>訂購明細</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            訂單編號
+        </th>
+        <th>
+            商品編號
+        </th>
+        <th>
+            商品名稱
+        </th>
+        <th>
+            售價
+        </th>
+        <th>
+            數量
+        </th>
+
+        <th>
+            顏色
+        </th>
+        <th>
+            尺寸
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        TotalPrice += Convert.ToInt32(item.fPrice) * Convert.ToInt32(item.fOrderQty);
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.fOrderId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fPId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fPName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fOrderQty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fAId_1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fAId_2)
+            </td>
+        </tr>
+    }
+
+</table>
+ 訂單金額：$&nbsp;@TotalPrice

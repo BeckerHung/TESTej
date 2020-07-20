@@ -3,112 +3,254 @@
 
 @{ ViewBag.Title = "ShoppingCar"; int TotalPrice = 0; }
 
-<form method="post" action="@Url.Action("DeleteSelected")">
-    <p>
-        @Html.ActionLink("返回上一頁", "Index")
-    </p>
-    <p>
-        <input type="submit" value="刪除選取項目" class="btn btn-info" onclick="return confirm('確定要刪除嗎?');" id="clickOrderdetail" />
-    </p>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    選取
-                </th>
-                <th>
-                    商品名稱
-                </th>
-                <th>
-                    圖示
-                </th>
-                <th>
-                    售價
-                </th>
-                <th>
-                    數量
-                </th>
-                <th>
-                    編輯
-                </th>
-            </tr>
-        </thead>
-        <tbody>
+<div class="main-container" style="width: auto;">
+   
+    <div class="col-md-12 col-xs-12">
+        <div>
+            <img src="~/Images/cart2.png" style="width:1000px" />
+        </div>
+        <div class="row stepOneCaption">
+            <div class="col-sm-8">
+                <span class="glyphicon glyphicon-shopping-cart stepOneCartIcon"></span>
+                <b class="font15">您本次購買以下商品</b>
+            </div>
+            <div class="col-sm-4">
+            </div>
+        </div>
+        <div id="partialViewDiv">
+            <form method="post"  id="form">
+                @*@using (Html.BeginForm(new { id = "form" }))
+                {*@
+                    <div class="cartTableWrapper" style="">
 
-            @foreach (var item in Model)
-            {
+                        @*<form method="post" action="@Url.Action("DeleteSelected")">*@
+                        @*<p> @Html.ActionLink("返回上一頁", "Index")  </p>*@
 
-                <tr>
-                    <td>
-                        <input type="checkbox" id="fPId" name="fPId" value="@item.fPId" />
-                    </td>
-                    <td>
-                        @item.fPName
-                    </td>
-                    <td>
-                        <img src="~/Images/@item.fImg" width="300" height="200" >
-                    </td>
-                    <td>
-                        @item.fPrice
-                    </td>
-                    <td class="cart-label" data-th="Quantity">
-                        <input type="number" class="form-control form-control-sm text-center js-part-quantity" value="@item.fOrderQty" max="@item.fMaxQty" min="1" >                                                          
-                    </td>                  
-                    <td>
-                        <a href="@Url.Action("DeleteCar")?fPId=@item.fPId" class="btn btn-danger">刪除</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</form>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <label> <input type="checkbox" name="CheckAll" value="核取方塊" id="CheckAll" />全選</label>
+                                    </th>
+                                    <th>
+                                        商品圖示
+                                    </th>
+                                    <th>
+                                        商品名稱
+                                    </th>
+                                    <th>
+                                        數量
+                                    </th>
+                                    <th>
+                                        原價
+                                    </th>
+                                    <th>
+                                        折扣價
+                                    </th>
+                                    <th>
+                                        刪除
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
-<div class="container py-5 " id="finishcheck ">
-    <h1 class="text-center mb-3 text-secondary ">訂單明細</h1>
-        <div class="alert alert-success alert-rounded text-center ">完成</div>
-        <table class="table table w-100 table-sm">
-            <thead class="thead-light">
-                <tr>
-                    <th width="100">
-                        商品名稱
-                    </th>
-                    <th width="100">
-                        售價
-                    </th>
-                    <th width="100">
-                        數量
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    TotalPrice += Convert.ToInt32(item.fPrice) * Convert.ToInt32(item.fOrderQty);
-                    <tr>
-                        <td>
-                            @item.fPName
-                        </td>
-                        <td>
-                            @item.fPrice
+                                @foreach (var item in Model)
+                                {
 
-                        </td>
-                        <td>
-                            @item.fOrderQty
-                        </td>
-                    </tr>
-                }
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="3" class="text-right">
-                        訂單金額：$&nbsp;@TotalPrice
-                    </td>
-                </tr>
-            </tfoot>
-        </table>
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" id="fPId" value="@item.fPId" name="fPId" @*name="Shoppingcarmodel[fPId]"*@ />
+                                        </td>
+                                        <td>
+                                            <img src="~/Images/@item.fImg" name="fImg" style="width:150px;height:100px;border-radius: 10px;border:solid 1px #E8E8E8;">
+                                        </td>
+                                        <td>
+                                            <p class="anchorCart">@item.fPName</p>
+                                        </td>
+                                        <td class="cart-label" data-th="Quantity">
+                                            <input type="number" class="form-control form-control-sm text-center js-part-quantity" value="@item.fOrderQty" max="@item.fMaxQty" min="1" name="fOrderQty">
+                                        </td>
+                                        <td>
+                                            $ @item.fPrice
+                                        </td>
+                                        <td>
+                                            $ @item.fPrice
+                                        </td>
+
+                                        <td>
+                                            <a href="@Url.Action("DeleteCar")?fPId=@item.fPId" class="btn btn-danger">刪除</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr class="cart_tfooterRow">
+                                    <td colspan="10">
+                                        <a id="DeleteAll" class="anchor darkBlue">整批刪除</a>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="10" class="txt-center">
+
+                                        <p>
+                                            購物車內合計有<span class="txt-red">1</span>項商品，消費總金額
+
+                                            <span class="money txt-big txt-red">$ 886 </span>
+                                        </p>
+                                    </td>
+                                </tr>
+                            </tfoot>
+
+                        </table>
+
+                        @*</form>*@
+
+                    </div>
+                    <div class="margintop15 right">
+                        @*<input type="submit" value="刪除選取項目" class="btn btn-info" onclick="return confirm('確定要刪除嗎?');" id="clickOrderdetail" />*@
+                        @*<input type="submit" name="save" value="送出訂單" formaction="SaveForm" formmethod="post" class="btn btn-success" />*@
+                        <input id="submit" type="button" class="btn btn-info" name="submit" value="submit">
+                        <input type="submit" name="cancel" value="勾選刪除" formaction="DeleteSelected" formmethod="post" onclick="return confirm('確定要刪除嗎?');" id="clickOrderdetail" class="btn btn-info" />
+                        <p> @Html.ActionLink("返回上一頁", "Index")  </p>
+                    </div>
+                @*}*@
+            </form>
+        </div>
+
+
+
     </div>
+</div>
 
 
+<script>
+    $(document).ready(function () {
+        $("#CheckAll").click(function () {
+            if ($("#CheckAll").prop("checked")) {//如果全選按鈕有被選擇的話（被選擇是true）
+                $("input[name='fPId']").prop("checked", true);//把所有的核取方框的property都變成勾選
+            } else {
+                $("input[name='fPId']").prop("checked", false);//把所有的核取方框的property都取消勾選
+            }
+        })
+        $("#submit").on('click', function () {
+            // send ajax
+            var URL = "SaveForm";
+            var formdata = $("#form").serializeArray();
+           
+            console.log(formdata);
+            var data = {};
+            //$(formdata).each(function (i, obj) {
+            //    if (formdata[i].name == "fPId")
+            //    {
+            //        data.add(formdata[i].values);
+            //    }
+            //    console.log(data);
+            //    return data;
+            //});
+            //console.log(data);
+            $.ajax({
+                url: URL, 
+                type: "POST",
+                dataType: 'json', // data type
+                data: $("#form").serializeArray(), // post data || get data
+                success: function (result) {                  
+                    console.log(result);
+                },
+                error: function (xhr, resp, text) {
+                    console.log(xhr, resp, text);
+                }
+            })
+        });
+    })
+</script>
+<style>
 
+    tbody td, .table th {
+        text-align: center;
+       
+    }
+    .table > tbody > tr > td{
+        padding: 8px;
+        line-height: 1.42857143;
+        vertical-align: middle;
+        border-top: 1px solid #ddd;
+    }
+    .btn {
+        float: right;
+        margin: 5px;
+    }
 
+    a:hover {
+        text-decoration: underline;
+        color: #060;
+    }
 
+    .anchorCart {
+        color: #616872;
+    }
+
+    .txt-red {
+        margin: 0px 2px;
+        color: #00A828;
+    }
+
+    .table {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 0px;
+    }
+
+    .main-container {
+        border: 1px solid #f0f0f0;
+        -webkit-box-shadow: #555 0px 4px 5px;
+        -moz-box-shadow: #555 0px 4px 5px;
+        box-shadow: #555 0px 4px 5px;
+        background-color: #FFF;
+        margin: 12px 0px;
+        min-height: auto;
+        overflow: hidden;
+        width: 100%;
+    }
+
+    .stepOneCaption {
+        margin: 0px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        color: #808080;
+    }
+
+    .stepOneCartIcon {
+        -webkit-animation: 8.5s shakeInfinite infinite;
+        margin-left: 10px;
+        font-size: 28px;
+        color: #76AA66;
+    }
+
+    .glyphicon {
+        position: relative;
+        top: 1px;
+        display: inline-block;
+        font-family: 'Glyphicons Halflings';
+        -webkit-font-smoothing: antialiased;
+        font-style: normal;
+        font-weight: normal;
+        line-height: 1;
+    }
+
+    .font15 {
+        font-size: 15px !important;
+    }
+
+    .cartTableWrapper {
+        border: solid 1px #E8E8E8;
+        border-radius: 5px;
+        padding: 5px 20px;
+        margin: 5px 10px;
+    }
+
+    .margintop15 {
+        margin-top: 15px !important;
+        margin-left: 15px !important;
+    }
+</style>

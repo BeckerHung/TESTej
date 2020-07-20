@@ -138,5 +138,26 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="tShoppingcarmodel">
+      <EntityTypeMapping TypeName="dbShoppingMailModel.tShoppingcarmodel">
+        <MappingFragment StoreEntitySet="tShoppingcarmodel">
+          <ScalarProperty Name="fSupplyLimit" ColumnName="fSupplyLimit" />
+          <ScalarProperty Name="fAId_3" ColumnName="fAId_3" />
+          <ScalarProperty Name="fAId_2" ColumnName="fAId_2" />
+          <ScalarProperty Name="fAId_1" ColumnName="fAId_1" />
+          <ScalarProperty Name="fIsApproved" ColumnName="fIsApproved" />
+          <ScalarProperty Name="fChangeQty" ColumnName="fChangeQty" />
+          <ScalarProperty Name="fImg" ColumnName="fImg" />
+          <ScalarProperty Name="fOrderQty" ColumnName="fOrderQty" />
+          <ScalarProperty Name="fMaxQty" ColumnName="fMaxQty" />
+          <ScalarProperty Name="fPrice" ColumnName="fPrice" />
+          <ScalarProperty Name="fPName" ColumnName="fPName" />
+          <ScalarProperty Name="fPId" ColumnName="fPId" />
+          <ScalarProperty Name="fUserId" ColumnName="fUserId" />
+          <ScalarProperty Name="fOrderId" ColumnName="fOrderId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

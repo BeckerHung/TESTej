@@ -126,6 +126,26 @@
     <Property Name="fSupplyLimit" Type="int" Nullable="false" />
     <Property Name="fQty" Type="int" />
   </EntityType>
+  <EntityType Name="tShoppingcarmodel">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="fOrderId" Type="int" />
+    <Property Name="fUserId" Type="nvarchar" MaxLength="50" />
+    <Property Name="fPId" Type="int" />
+    <Property Name="fPName" Type="nvarchar" MaxLength="50" />
+    <Property Name="fPrice" Type="int" />
+    <Property Name="fMaxQty" Type="int" />
+    <Property Name="fOrderQty" Type="int" />
+    <Property Name="fImg" Type="nvarchar" MaxLength="50" />
+    <Property Name="fChangeQty" Type="int" />
+    <Property Name="fIsApproved" Type="nvarchar" MaxLength="50" />
+    <Property Name="fAId_1" Type="int" />
+    <Property Name="fAId_2" Type="int" />
+    <Property Name="fAId_3" Type="int" />
+    <Property Name="fSupplyLimit" Type="int" />
+  </EntityType>
   <EntityContainer Name="dbShoppingMailModelStoreContainer">
     <EntitySet Name="ItemModel" EntityType="Self.ItemModel" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProductModel" EntityType="Self.ProductModel" Schema="dbo" store:Type="Tables" />
@@ -138,5 +158,6 @@
     <EntitySet Name="tProductCategory" EntityType="Self.tProductCategory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tProductProperty" EntityType="Self.tProductProperty" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tProductStock" EntityType="Self.tProductStock" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tShoppingcarmodel" EntityType="Self.tShoppingcarmodel" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>

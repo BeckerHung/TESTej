@@ -100,45 +100,8 @@ namespace ShoppingMail.Controllers
             Session.Clear();
             return RedirectToAction("Index");
         }
-  
-        //說明:處理訂單
-        //Post:Index/ShoppingCar
-        [HttpPost]
-        public ActionResult ShoppingCar(string fReceiver, string fEmail)
-        {
-            //說明:取得會員帳號並指定給fUserId
-            string fUserId = (Session["Member"] as tMember).fUserId;
-            //說明:
-            //建立唯一識別值並指定給guid變數(用來當作訂單編號)
-            //tOrder的fOrderId欄位會關連到tOrderDetail的fOrderId
-            //一筆訂單資料會對應到多筆訂單明細
-            string gid = Guid.NewGuid().ToString();
-            int guid = Convert.ToInt32(gid);
-            //說明:建立訂單主檔資料
-            tOrder order = new tOrder();
-            order.fOrderId = guid;
-            order.fUserId = fUserId;
-            order.fReceiver = fReceiver;
-            order.fEmail = fEmail;
-            order.fAddress = "1" /*fAddress*/;
-            order.fDate = DateTime.Now;
-            db.tOrder.Add(order);
-            //說明:找出是購物車狀態的產品
-            var carList = db.tOrderDetail
-                .Where(m => m.fIsApproved == "否" && m.fUserId == fUserId)
-                .ToList();
-            //說明:找出確認訂購地產品
-            foreach (var item in carList)
-            {
-                item.fOrderId = guid;
-                item.fIsApproved = "是";
-            }
-            //說明:完成tOrder及更新tOrderDetail
-            db.SaveChanges();
-            return RedirectToAction("OrderList");
-        }
 
-        //說明:建立訂單
+        //功能:建立訂單
         //GET:Home/OrderList
         public ActionResult OrderList()
         {
@@ -150,19 +113,7 @@ namespace ShoppingMail.Controllers
             return View("OrderList", "_LayoutMember", orders);
         }
 
-        //說明:建立訂單明細
-        //GET:Index/OrderDetail
-        public ActionResult OrderDetail(int? fOrderId)
-
-        {
-            if (fOrderId == null)
-                return RedirectToAction("ShoppingCar");
-            //說明:根據fOrderId找出與訂單主檔關聯的明細，並指定給DetailDetails
-            var orderDetails = db.tOrderDetail
-                .Where(m => m.fOrderId == fOrderId).ToList();
-            //說明:顯示訂單明細
-            return View("OrderDetail", "_LayoutMember", orderDetails);
-        }
+        
 
         public ActionResult About()
         {
@@ -220,7 +171,6 @@ namespace ShoppingMail.Controllers
             }
             db.SaveChanges();
             var likenum = db.tProduct.FirstOrDefault(x => x.fPId == pid).fP_islike;
-            //return Json(new { success = true } ,JsonRequestBehavior.AllowGet);
             return Json(likenum, JsonRequestBehavior.AllowGet);
         }
 
@@ -243,6 +193,7 @@ namespace ShoppingMail.Controllers
         //功能:將tTree加入到找父層的subdir
         public List<tTree> findFather(List<tTree> result2, tProductCategory item, tTree smallTree_2)
         {
+            
             foreach (var ba in result2)
             {
                 //說明:找到爸爸
@@ -288,7 +239,6 @@ namespace ShoppingMail.Controllers
             }
             return result2;
         }
-        //20200715
 
         //功能:無窮選單_傳送分類資料至前端
         [HttpGet]
@@ -309,19 +259,37 @@ namespace ShoppingMail.Controllers
 
         }
 
-        //功能:Cards View的商品資訊內容_傳送資料到前端
-        [HttpGet]
-        public JsonResult GetProductcards()
-        {
-            var model = from A in db.tProduct
-                        join B in db.tProductStock on A.fPId equals B.fPId
-                        orderby A.fPId
-                        select new { fId = A.fId, fName = A.fName, fPrice = A.fPrice, fP_islike = A.fP_islike, fQty = B.fQty, fImg = A.fImg };
+        
 
-            return Json(model, JsonRequestBehavior.AllowGet);
+        public class ProductCard
+        {
+            public int fId { get; set; }
+            public string fName { get; set; }
+            public int? fPrice { get; set; }
+            public int? fQty { get; set; }
+            public string fImg { get; set; }
+            public int? fP_islike { get; set; }
+
+            public string fCategory { get; set; }
         }
 
-       
+        [HttpGet]
+        public ActionResult GetProductcards_2(int NowPage)
+        {
+            //說明:分筆取出資料
+            int PageSize = 4; //每頁顯示筆數
+            int AllData = (NowPage + 1) * PageSize; //總顯示筆數
+
+            var model = (from A in db.tProduct
+                        join B in db.tProductStock on A.fPId equals B.fPId
+                        orderby A.fPId
+                        select new ProductCard { fId = A.fId, fName = A.fName, fPrice = A.fPrice, fP_islike = A.fP_islike, fQty = B.fQty, fImg = A.fImg }).Take(AllData);
+
+            return PartialView("_ProductcardPartial",model.ToList());
+        }
+
+        
+
         //功能:建立產品新增頁面
         //GET:ComplexBind
         public ActionResult Create() 
@@ -344,7 +312,7 @@ namespace ShoppingMail.Controllers
             temp.Img = product.Name + "_0.jfif";
             db.ProductModel.Add(temp);           
 
-            //功能:檔案上傳
+            //說明:檔案上傳
             if (photo != null)  
             {
                 string fileName = "";
@@ -407,15 +375,91 @@ namespace ShoppingMail.Controllers
                        join C in db.tOrderDetail on A.fPId equals C.fPId
                        join D in db.tMember on C.fUserId equals D.fUserId
                        join E in db.tAttributes on B.fPId equals E.Id
-                       orderby A.fPId
+                       orderby C.fId
                        //說明:動態型別                     
                        select new Shoppingcarmodel
-                       { fOrderId = C.fOrderId, fUserId = C.fUserId, fPId = C.fPId, fPName = C.fName, fPrice = A.fPrice,
+                       { fOrderId = C.fId, fUserId = C.fUserId, fPId = C.fPId, fPName = C.fName, fPrice = A.fPrice,
                            fMaxQty = B.fQty, fOrderQty = C.fQty, fImg = A.fImg, fChangeQTY = A.fChangeQTY,
-                           fSupplyLimit = B.fSupplyLimit, fAId_1 = B.fAId_1, fAId_2 = B.fAId_2, fAName = E.fAName };          
+                           fSupplyLimit = B.fSupplyLimit, fAId_1 = B.fAId_1, fAId_2 = B.fAId_2, fAName = E.fAName }
+                       ;          
             var shoppingcarModel = temp.ToList();
+            
+            ShowOrderdetail(shoppingcarModel);
             //說明:ShoppinCar.cshtml套用_LayoutMember.cshtml，view套用shoppingcarModel模型
             return View("ShoppingCar", "_LayoutMember", shoppingcarModel);
+        }
+
+        [HttpGet]
+        public ActionResult ShowOrderdetail()
+        {
+            var allOrderdetail = db.tShoppingcarmodel.ToList();
+            return View("ShowOrderdetail", "_LayoutMember", allOrderdetail);
+          
+        }
+
+
+        [HttpPost]
+        public ActionResult ShowOrderdetail(List<Shoppingcarmodel> model)
+        {
+            var temp = new tShoppingcarmodel();
+            foreach (var item in model) 
+            {
+                temp.fOrderId = item.fOrderId;
+                temp.fUserId = item.fUserId;
+                temp.fPId = item.fPId;
+                temp.fPName = item.fPName;
+                temp.fPrice = item.fPrice;
+                temp.fMaxQty = item.fMaxQty;
+                temp.fOrderQty = item.fOrderQty;
+                temp.fImg = item.fImg;
+                temp.fChangeQty = item.fChangeQTY;
+                temp.fSupplyLimit = item.fSupplyLimit;
+                temp.fAId_1 = item.fAId_1;
+                temp.fAId_2 = item.fAId_2;
+                db.tShoppingcarmodel.Add(temp);
+            }
+            //db.SaveChanges();
+            //var allOrderdetail = db.tShoppingcarmodel.ToList();
+            //return View("ShowOrderdetail", "_LayoutMember", allOrderdetail);
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        }
+
+
+        //說明:處理訂單
+        //Post:Index/ShoppingCar
+        [HttpPost]
+        public ActionResult ShoppingCar(string fReceiver, string fEmail)
+        {
+            //說明:取得會員帳號並指定給fUserId
+            string fUserId = (Session["Member"] as tMember).fUserId;
+            //說明:
+            //建立唯一識別值並指定給guid變數(用來當作訂單編號)
+            //tOrder的fOrderId欄位會關連到tOrderDetail的fOrderId
+            //一筆訂單資料會對應到多筆訂單明細
+            string gid = Guid.NewGuid().ToString();
+            int guid = Convert.ToInt32(gid);
+            //說明:建立訂單主檔資料
+            tOrder order = new tOrder();
+            order.fOrderId = guid;
+            order.fUserId = fUserId;
+            order.fReceiver = fReceiver;
+            order.fEmail = fEmail;
+            order.fAddress = "1" /*fAddress*/;
+            order.fDate = DateTime.Now;
+            db.tOrder.Add(order);
+            //說明:找出是購物車狀態的產品
+            var carList = db.tOrderDetail
+                .Where(m => m.fIsApproved == "否" && m.fUserId == fUserId)
+                .ToList();
+            //說明:找出確認訂購地產品
+            foreach (var item in carList)
+            {
+                item.fOrderId = guid;
+                item.fIsApproved = "是";
+            }
+            //說明:完成tOrder及更新tOrderDetail
+            db.SaveChanges();
+            return RedirectToAction("OrderList");
         }
 
         //說明:加入購物車
@@ -449,6 +493,7 @@ namespace ShoppingMail.Controllers
                 currentCar.fQty += 1;
             }
             db.SaveChanges();
+            var test = db.tOrderDetail.ToList();
             return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
 
@@ -468,7 +513,7 @@ namespace ShoppingMail.Controllers
 
         //功能:選取(刪除)購物車
         [HttpPost]
-        public ActionResult DeleteSelected(int[] fPId)
+        public ActionResult DeleteSelected(List<int> fPId)
         {
             //說明:使用者沒有選資料
             if (fPId == null)
@@ -476,7 +521,7 @@ namespace ShoppingMail.Controllers
             //說明:利用變數抓取每筆資料編號
             int delfPId;
             //說明:逐筆抓刪除的資料並刪除
-            for (int i = 0; i < fPId.Length; i++)
+            for (int i = 0; i < fPId.Count; i++)
             {
                 delfPId = fPId[i];
                 var orderDetail = db.tOrderDetail.Where(m => m.fPId == delfPId).FirstOrDefault();
@@ -485,6 +530,62 @@ namespace ShoppingMail.Controllers
             db.SaveChanges();
             return RedirectToAction("ShoppingCar");
         }
+
+        [HttpPost]
+        public ActionResult SaveForm(List<Shoppingcarmodel> model)
+        {
+            //foreach (var item in model)
+            //{
+
+
+            //}
+            var temp = model;
+           
+            
+            return RedirectToAction("ShowOrderdetail");
+        }
+
+
+        //功能:搜尋(關鍵字比對)
+        [HttpGet]
+        public ActionResult SearchAccountContact()
+        {	//參數key為使用者輸入在input的資訊
+            var data = (from A in db.tProduct
+                        join B in db.tProductCategory on A.fCategory equals B.Id
+                        orderby A.fPId
+                        select new ProductCard { fId = A.fId, fName = A.fName, fPrice = A.fPrice, fP_islike = A.fP_islike, fImg = A.fImg, fCategory = B.fName })
+                .Select(m => new
+                {
+                    value = m.fName,
+                    label = m.fCategory,
+                }).ToArray();
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        //功能:搜尋(Sidebar)
+        [HttpGet]
+        public ActionResult Search(string search)
+        {
+            var all = db.tProductCategory.Where(m => m.fName == search).Count();
+
+            var model = (from A in db.tProduct
+                         join B in db.tProductCategory.Where(m => m.fName == search) on A.fCategory equals B.Id
+                         orderby A.fPId
+                         select new ProductCard { fId = A.fId, fName = A.fName, fPrice = A.fPrice, fP_islike = A.fP_islike, fImg = A.fImg, fCategory = B.fName });
+
+            return PartialView("_ProductcardPartial", model.ToList());
+        }
+
+
+
+
+
+
+
+
+
+
+
     }
 
 }

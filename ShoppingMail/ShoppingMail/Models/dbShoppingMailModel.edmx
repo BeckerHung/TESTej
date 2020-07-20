@@ -131,6 +131,26 @@
           <Property Name="fSupplyLimit" Type="int" Nullable="false" />
           <Property Name="fQty" Type="int" />
         </EntityType>
+        <EntityType Name="tShoppingcarmodel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="fOrderId" Type="int" />
+          <Property Name="fUserId" Type="nvarchar" MaxLength="50" />
+          <Property Name="fPId" Type="int" />
+          <Property Name="fPName" Type="nvarchar" MaxLength="50" />
+          <Property Name="fPrice" Type="int" />
+          <Property Name="fMaxQty" Type="int" />
+          <Property Name="fOrderQty" Type="int" />
+          <Property Name="fImg" Type="nvarchar" MaxLength="50" />
+          <Property Name="fChangeQty" Type="int" />
+          <Property Name="fIsApproved" Type="nvarchar" MaxLength="50" />
+          <Property Name="fAId_1" Type="int" />
+          <Property Name="fAId_2" Type="int" />
+          <Property Name="fAId_3" Type="int" />
+          <Property Name="fSupplyLimit" Type="int" />
+        </EntityType>
         <EntityContainer Name="dbShoppingMailModelStoreContainer">
           <EntitySet Name="ItemModel" EntityType="Self.ItemModel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductModel" EntityType="Self.ProductModel" Schema="dbo" store:Type="Tables" />
@@ -143,6 +163,7 @@
           <EntitySet Name="tProductCategory" EntityType="Self.tProductCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tProductProperty" EntityType="Self.tProductProperty" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tProductStock" EntityType="Self.tProductStock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tShoppingcarmodel" EntityType="Self.tShoppingcarmodel" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -216,6 +237,7 @@
           <EntitySet Name="tProduct" EntityType="dbShoppingMailModel.tProduct" />
           <EntitySet Name="ItemModel" EntityType="dbShoppingMailModel.ItemModel" />
           <EntitySet Name="ProductModel" EntityType="dbShoppingMailModel.ProductModel" />
+          <EntitySet Name="tShoppingcarmodel" EntityType="dbShoppingMailModel.tShoppingcarmodel" />
         </EntityContainer>
         <EntityType Name="ThumbsUp">
           <Key>
@@ -286,6 +308,26 @@
           <Property Name="Price" Type="Int32" />
           <Property Name="Img" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Stock" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tShoppingcarmodel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="fOrderId" Type="Int32" />
+          <Property Name="fUserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fPId" Type="Int32" />
+          <Property Name="fPName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fPrice" Type="Int32" />
+          <Property Name="fMaxQty" Type="Int32" />
+          <Property Name="fOrderQty" Type="Int32" />
+          <Property Name="fImg" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fChangeQty" Type="Int32" />
+          <Property Name="fIsApproved" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fAId_1" Type="Int32" />
+          <Property Name="fAId_2" Type="Int32" />
+          <Property Name="fAId_3" Type="Int32" />
+          <Property Name="fSupplyLimit" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -426,6 +468,27 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ParentCategoryId" ColumnName="ParentCategoryId" />
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tShoppingcarmodel">
+            <EntityTypeMapping TypeName="dbShoppingMailModel.tShoppingcarmodel">
+              <MappingFragment StoreEntitySet="tShoppingcarmodel">
+                <ScalarProperty Name="fSupplyLimit" ColumnName="fSupplyLimit" />
+                <ScalarProperty Name="fAId_3" ColumnName="fAId_3" />
+                <ScalarProperty Name="fAId_2" ColumnName="fAId_2" />
+                <ScalarProperty Name="fAId_1" ColumnName="fAId_1" />
+                <ScalarProperty Name="fIsApproved" ColumnName="fIsApproved" />
+                <ScalarProperty Name="fChangeQty" ColumnName="fChangeQty" />
+                <ScalarProperty Name="fImg" ColumnName="fImg" />
+                <ScalarProperty Name="fOrderQty" ColumnName="fOrderQty" />
+                <ScalarProperty Name="fMaxQty" ColumnName="fMaxQty" />
+                <ScalarProperty Name="fPrice" ColumnName="fPrice" />
+                <ScalarProperty Name="fPName" ColumnName="fPName" />
+                <ScalarProperty Name="fPId" ColumnName="fPId" />
+                <ScalarProperty Name="fUserId" ColumnName="fUserId" />
+                <ScalarProperty Name="fOrderId" ColumnName="fOrderId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

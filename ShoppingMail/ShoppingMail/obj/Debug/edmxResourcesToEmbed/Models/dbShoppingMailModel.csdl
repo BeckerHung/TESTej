@@ -68,6 +68,7 @@
     <EntitySet Name="tProduct" EntityType="dbShoppingMailModel.tProduct" />
     <EntitySet Name="ItemModel" EntityType="dbShoppingMailModel.ItemModel" />
     <EntitySet Name="ProductModel" EntityType="dbShoppingMailModel.ProductModel" />
+    <EntitySet Name="tShoppingcarmodel" EntityType="dbShoppingMailModel.tShoppingcarmodel" />
   </EntityContainer>
   <EntityType Name="ThumbsUp">
     <Key>
@@ -138,5 +139,25 @@
     <Property Name="Price" Type="Int32" />
     <Property Name="Img" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Stock" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tShoppingcarmodel">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="fOrderId" Type="Int32" />
+    <Property Name="fUserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fPId" Type="Int32" />
+    <Property Name="fPName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fPrice" Type="Int32" />
+    <Property Name="fMaxQty" Type="Int32" />
+    <Property Name="fOrderQty" Type="Int32" />
+    <Property Name="fImg" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fChangeQty" Type="Int32" />
+    <Property Name="fIsApproved" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fAId_1" Type="Int32" />
+    <Property Name="fAId_2" Type="Int32" />
+    <Property Name="fAId_3" Type="Int32" />
+    <Property Name="fSupplyLimit" Type="Int32" />
   </EntityType>
 </Schema>

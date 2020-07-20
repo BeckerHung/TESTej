@@ -1,100 +1,55 @@
-﻿@*Productcards*@
+﻿
+@model IEnumerable<ShoppingMail.Controllers.HomeController.ProductCard>
+
 <div class="row" id="productcard"></div>
 
-<script>
-    //筆記:在JS中使用絕對路徑方式
-    var root = '@Url.Content("~/")';
-    $(function () {
-        setProductCards();
-    });
-    //功能:從後端取得資料長出主畫面的卡片
-    function setProductCards() {
-        $.ajax({
-        url: '@Url.Action("GetProductcards", "Home")',
-        type: "GET",
-        cache: false,
-        success: function (model) {
-            //說明:將後端取到的JSON傳至前端長出卡片
-            var html_2 = createCard(model);
-            $("#productcard").html(html_2);
-            //功能:將商品加入購物車
-            //說明:每次加入購物車數量為1，可重複加入，加入時頁面不跳轉
-            //說明:點選導航列購物車圖示可察看目前加入商品
-            $('a[name = "addShoppingcar"]').on('click', function (e) {
-                //說明:利用自定義屬性取得fId
-                var fId = $(this).data('addcar');
-                addCar(fId);
-                var num = parseInt(document.getElementById("showShoppingcarnum").innerText);
-                num += 1;
-                document.getElementById("showShoppingcarnum").innerText = num;                
-            });
+@*index不要用pv，而是用c丟pv.model*@
 
-         },
-         error: function (jqXHR, exception) {
-                var msg = '';
-                if (jqXHR.status === 0) {
-                    msg = 'Not connect.\n Verify Network.';
-                } else if (jqXHR.status === 404) {
-                    msg = 'Requested page not found. [404]';
-                } else if (jqXHR.status === 500) {
-                    msg = 'Internal Server Error [500].';
-                } else if (exception === 'parsererror') {
-                    msg = 'Requested JSON parse failed.';
-                } else if (exception === 'timeout') {
-                    msg = 'Time out error.';
-                } else if (exception === 'abort') {
-                    msg = 'Ajax request aborted.';
-                } else {
-                    msg = 'Uncaught Error.\n' + jqXHR.statusText;
-                }
-                alert(msg);
-            }
-     });
+<div id="card">
+    @foreach (var item in Model)
+    {
+
+        <div class="item">
+            <div class="col-xs-3-fix">
+                <div class="card product-item-main">
+                    @*說明:燈箱start*@
+                    <div class="cardcontainer">
+                        <img src="~/Images/@item.fImg" style="width:100%" class="image">
+                        @*說明:燈箱隱藏區*@
+                        <div class="transition">
+                            <div class="text" style="min-height: 105px;">
+                                <ul>
+                                    <li>課程類型：DIY手作藝品 </li>
+                                    <li>上課時數：01:30:00 </li>
+                                    <li>總課堂數：4 </li>
+                                </ul>
+                            </div>
+                            <span class="addTrace addTracking"><i class="fa fa-bookmark"></i>加入收藏</span>
+                        </div>
+                    </div>
+                    @*說明:顯示星星及喜歡人數*@
+                    <div class="rating-input grey-bg" align="right">
+                        <span class="glyphicon glyphicon-star" data-value="1"></span>
+                        <span class="glyphicon glyphicon-star" data-value="2"></span>
+                        <span class="glyphicon glyphicon-star" data-value="3"></span>
+                        <span class="glyphicon glyphicon-star" data-value="4"></span>
+                        <span class="glyphicon glyphicon-star-empty" data-value="5"></span>
+                        <span class="badge marginright5"> <p name="showlike"> @item.fP_islike </p> </span>
+                    </div>
+                    @*說明:卡片主體*@
+                    <div class=" chapter-content">
+                        <h3 class="chapter-content-blue"> @item.fName </h3>
+                        <h4>@item.fName </h4>
+                        <span class="chapter-detail">透過黏土課程，爸媽能陪著小朋友一起成長</span>
+                        <span class="eye" title="瀏覽數">100</span>
+                        <span class="money" title="價格">$ 999</span>
+                        <span class="addcart"><button type="button" class="cloud btn-block-add" name="addShoppingcar" data-addcar="@item.fId">線上課程</button></span>
+                    </div>
+                </div>
+            </div>
+        </div>
     }
-
-</script>
-
-
-
-<script>
-    //功能:主畫面呈現商品Cards View
-    function createCard(array) {
-        html_2 = "";
-        $.each(array, function (e, item) {
-
-            html_2 += '<div class="col-xs-3-fix">';
-            html_2 += '<div class="card product-item-main" style="width: 18rem;" >';
-            //說明:顯示商品圖片
-            html_2 += '<img src="' + root + 'Images/' + item.fImg + '" style="width:100%" name="bighand" data-imgid="' + item.fId + '" class="btn" /*onclick="like(' + item.fId + ')"*//>';
-            //說明:顯示星星
-            html_2 += '<div class="rating-input grey-bg" align="right">'
-            html_2 += '<span class="glyphicon glyphicon-star" data-value="1"></span>'
-            html_2 += '<span class="glyphicon glyphicon-star" data-value="2"></span>'
-            html_2 += '<span class="glyphicon glyphicon-star" data-value="3"></span>'
-            html_2 += '<span class="glyphicon glyphicon-star" data-value="4"></span>'
-            html_2 += '<span class="glyphicon glyphicon-star" data-value="5"></span>'
-            //說明:顯示喜歡人數
-            html_2 += '<span class="badge marginright5"> <p name="showlike" >' + item.fP_islike + '</p> </span>'
-            html_2 += '</div>'
-            html_2 += '<div class="card-body chapter-content">';
-            html_2 += '<h3 class="chapter-content-blue">' + item.fName + '</h3>'
-            html_2 += '<h4 class="card-title">' + item.fName + '</h4>';           
-            html_2 += '<span class="eye" title="瀏覽數">100</span>';  
-            html_2 += '</div>';          
-            html_2 += '<div class="card-footer bg-white border-top-0">';
-            //說明:加入購物車按鈕
-            html_2 += '<a class="btn chapter-content-blue " name="addShoppingcar" data-addcar="' + item.fId + '">加入購物車</a>';          
-            html_2 += '</div>';
-            html_2 += '</div>';
-            html_2 += '</div>';        
-        })
-        return html_2;
-    }
-</script>
-
-
-
-
+</div>
 
 
 

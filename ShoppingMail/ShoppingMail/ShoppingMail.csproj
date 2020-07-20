@@ -184,7 +184,9 @@
     <Compile Include="Models\tProductStock.cs">
       <DependentUpon>dbShoppingMailModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ViewModel.cs" />
+    <Compile Include="Models\tShoppingcarmodel.cs">
+      <DependentUpon>dbShoppingMailModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -242,6 +244,8 @@
     <Content Include="Models\dbShoppingMailModel.edmx.diagram">
       <DependentUpon>dbShoppingMailModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Scripts\infinite-scroll.pkgd.js" />
+    <Content Include="Scripts\infinite-scroll.pkgd.min.js" />
     <Content Include="Scripts\jquery-1.11.1.min.map" />
     <Content Include="libman.json" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -251,6 +255,7 @@
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -281,12 +286,11 @@
     <Content Include="Views\Home\Logout.cshtml" />
     <Content Include="Views\Home\ShoppingCar.cshtml" />
     <Content Include="Views\Home\OrderList.cshtml" />
-    <Content Include="Views\Home\OrderDetail.cshtml" />
     <Content Include="Views\Home\GetCategory.cshtml" />
     <Content Include="Views\Shared\_ProductcardPartial.cshtml" />
-    <Content Include="Views\Shared\_CardPartial.cshtml" />
     <Content Include="Views\Home\Create.cshtml" />
     <Content Include="Views\Home\Product.cshtml" />
+    <Content Include="Views\Home\ShowOrderdetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Photos\" />

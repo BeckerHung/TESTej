@@ -7,7 +7,7 @@ namespace ShoppingMail.Models
 {
     public class Shoppingcarmodel
     {
-        public Nullable<int> fOrderId { get; set; }
+        public int? fOrderId { get; set; }
         public string fUserId { get; set; }
         public Nullable<int> fPId { get; set; }
         public string fPName { get; set; }
