@@ -263,6 +263,10 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\strip.pkgd.min.js" />
     <Content Include="Scripts\try.js" />
+    <Content Include="Testphoto\1.jpg" />
+    <Content Include="Testphoto\2.jpg" />
+    <Content Include="Testphoto\3.jpg" />
+    <Content Include="Testphoto\4.jpg" />
     <Content Include="Testphoto\logo-3people.png" />
     <Content Include="Testphoto\三倍券.jpg" />
     <Content Include="Testphoto\國營投考.jpg" />

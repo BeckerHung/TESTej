@@ -27,7 +27,7 @@
                     </div>
                 </a>
 
-                <ul style="display:inline" class="nav navbar-nav  navbar-right">
+                <ul style="display:inline; list-style-type: none;" class="nav navbar-nav  navbar-right">
                     <li class="dropdown-onhover dropdown-short">
                         <a title="返回舊版首頁" class="text-shadow" href="/default.aspx"><i class="fa fa-undo" aria-hidden="true">&nbsp;返回舊版</i></a>
                     </li>
@@ -61,97 +61,170 @@
            <div class="col-sm-12  ContainerTop">
                <div class="">
                    <div class="row RowDiv">
-                     <div class="_DetailADBanner">
-                          <div class="carousel">
-                                   <div class="carousel-inner">
-                                       <input class="carousel-open" type="radio" id="carousel-1" name="carousel" aria-hidden="true" hidden="" checked="checked">
-                                       <div class="carousel-item">
-                                           <img src="~/Testphoto/三倍券.jpg" />
-                                       </div>
-                                       <input class="carousel-open" type="radio" id="carousel-2" name="carousel" aria-hidden="true" hidden="">
-                                       <div class="carousel-item">
-                                           <img src="~/Testphoto/武漢肺炎.jpg" />
-                                       </div>
-                                       <input class="carousel-open" type="radio" id="carousel-3" name="carousel" aria-hidden="true" hidden="">
-                                       <div class="carousel-item">
-                                           <img src="~/Testphoto/金融基測.jpg" />
-                                       </div>
-                                       <input class="carousel-open" type="radio" id="carousel-3" name="carousel" aria-hidden="true" hidden="">
-                                       <div class="carousel-item">
-                                           <img src="~/Testphoto/國營投考.jpg" />
-                                       </div>
-                                       <input class="carousel-open" type="radio" id="carousel-3" name="carousel" aria-hidden="true" hidden="">
-                                       <div class="carousel-item">
-                                           <img src="~/Testphoto/就業季.jpg" />
-                                       </div>
-                                       <input class="carousel-open" type="radio" id="carousel-3" name="carousel" aria-hidden="true" hidden="">
-                                       <div class="carousel-item">
-                                           <img src="~/Testphoto/銀行考衝班.jpg" />
-                                       </div>
-                                       <label for="carousel-3" class="carousel-control prev control-1">‹</label>
-                                       <label for="carousel-2" class="carousel-control next control-1">›</label>
-                                       <label for="carousel-1" class="carousel-control prev control-2">‹</label>
-                                       <label for="carousel-3" class="carousel-control next control-2">›</label>
-                                       <label for="carousel-2" class="carousel-control prev control-3">‹</label>
-                                       <label for="carousel-4" class="carousel-control next control-3">›</label>
-                                       <label for="carousel-3" class="carousel-control prev control-4">‹</label>
-                                       <label for="carousel-5" class="carousel-control next control-4">›</label>
-                                       <label for="carousel-4" class="carousel-control prev control-5">‹</label>
-                                       <label for="carousel-6" class="carousel-control next control-5">›</label>
-                                       <label for="carousel-5" class="carousel-control prev control-6">‹</label>
-                                       <label for="carousel-1" class="carousel-control next control-6">›</label>
-                                       <ol class="carousel-indicators">
-                                           <li>
-                                               <label for="carousel-1" class="carousel-bullet">•</label>
-                                           </li>
-                                           <li>
-                                               <label for="carousel-2" class="carousel-bullet">•</label>
-                                           </li>
-                                           <li>
-                                               <label for="carousel-3" class="carousel-bullet">•</label>
-                                           </li>
-                                           <li>
-                                               <label for="carousel-4" class="carousel-bullet">•</label>
-                                           </li>
-                                           <li>
-                                               <label for="carousel-5" class="carousel-bullet">•</label>
-                                           </li>
-                                           <li>
-                                               <label for="carousel-6" class="carousel-bullet">•</label>
-                                           </li>
-                                       </ol>
+                       <div class="_DetailADBanner">
+                           <div class="carousel">
+                               <div class="carousel-inner">
+                                   <input class="carousel-open" type="radio" id="carousel-1" name="carousel" aria-hidden="true" hidden="" checked="checked">
+                                   <div class="carousel-item">
+                                       <img src="~/Testphoto/三倍券.jpg" />
                                    </div>
+                                   <input class="carousel-open" type="radio" id="carousel-2" name="carousel" aria-hidden="true" hidden="">
+                                   <div class="carousel-item">
+                                       <img src="~/Testphoto/武漢肺炎.jpg" />
+                                   </div>
+                                   <input class="carousel-open" type="radio" id="carousel-3" name="carousel" aria-hidden="true" hidden="">
+                                   <div class="carousel-item">
+                                       <img src="~/Testphoto/金融基測.jpg" />
+                                   </div>
+                                   <input class="carousel-open" type="radio" id="carousel-3" name="carousel" aria-hidden="true" hidden="">
+                                   <div class="carousel-item">
+                                       <img src="~/Testphoto/國營投考.jpg" />
+                                   </div>
+                                   <input class="carousel-open" type="radio" id="carousel-3" name="carousel" aria-hidden="true" hidden="">
+                                   <div class="carousel-item">
+                                       <img src="~/Testphoto/就業季.jpg" />
+                                   </div>
+                                   <input class="carousel-open" type="radio" id="carousel-3" name="carousel" aria-hidden="true" hidden="">
+                                   <div class="carousel-item">
+                                       <img src="~/Testphoto/銀行考衝班.jpg" />
+                                   </div>
+                                   <label for="carousel-3" class="carousel-control prev control-1">‹</label>
+                                   <label for="carousel-2" class="carousel-control next control-1">›</label>
+                                   <label for="carousel-1" class="carousel-control prev control-2">‹</label>
+                                   <label for="carousel-3" class="carousel-control next control-2">›</label>
+                                   <label for="carousel-2" class="carousel-control prev control-3">‹</label>
+                                   <label for="carousel-4" class="carousel-control next control-3">›</label>
+                                   <label for="carousel-3" class="carousel-control prev control-4">‹</label>
+                                   <label for="carousel-5" class="carousel-control next control-4">›</label>
+                                   <label for="carousel-4" class="carousel-control prev control-5">‹</label>
+                                   <label for="carousel-6" class="carousel-control next control-5">›</label>
+                                   <label for="carousel-5" class="carousel-control prev control-6">‹</label>
+                                   <label for="carousel-1" class="carousel-control next control-6">›</label>
+                                   <ol class="carousel-indicators">
+                                       <li>
+                                           <label for="carousel-1" class="carousel-bullet">•</label>
+                                       </li>
+                                       <li>
+                                           <label for="carousel-2" class="carousel-bullet">•</label>
+                                       </li>
+                                       <li>
+                                           <label for="carousel-3" class="carousel-bullet">•</label>
+                                       </li>
+                                       <li>
+                                           <label for="carousel-4" class="carousel-bullet">•</label>
+                                       </li>
+                                       <li>
+                                           <label for="carousel-5" class="carousel-bullet">•</label>
+                                       </li>
+                                       <li>
+                                           <label for="carousel-6" class="carousel-bullet">•</label>
+                                       </li>
+                                   </ol>
                                </div>
-                          <div class="navbar navbar-3people-blue-light">
-                              <ul>
-                                  <li><a href="#">最新法規</a></li>
-                                  <li><a href="#">全省門市Line</a></li>
-                                  <li><a href="#">網路諮詢</a></li>
-                                  <li><a href="#">學員金榜</a></li>
-                                  <li><a href="#">考試計畫表</a></li>
-                                  <li><a href="#">網路書店</a></li>
-                                  <li><a href="#">課程試閱</a></li>
-                                  <li class="First_li">
-                                      <a href="#home">熱門國家考試</a>
-                                  </li>
-                              </ul>
-                          </div>
-                          <div class="dropdown-menu collapse  MainList">
-                              <div><a href="#">公職考試</a></div>
-                              <div><a href="#">國營事業</a></div>
-                              <div><a href="#">銀行招考</a></div>
-                              <div><a href="#">會計證照</a></div>
-                              <div><a href="#">專技證照</a></div>
-                              <div><a href="#">金融證照</a></div>
-                              <div><a href="#">醫護證照</a></div>
-                              <div><a href="#">教職升學</a></div>
-                              <div><a href="#">考情說明</a></div>
-                          </div>
-                     </div>                        
+                           </div>
+
+                       </div>
+                   </div>
+               </div>
+               <div class="navbar navbar-3people-blue-light">
+                   <ul>
+                       <li><a href="#">最新法規</a></li>
+                       <li><a href="#">全省門市Line</a></li>
+                       <li><a href="#">網路諮詢</a></li>
+                       <li><a href="#">學員金榜</a></li>
+                       <li><a href="#">考試計畫表</a></li>
+                       <li><a href="#">網路書店</a></li>
+                       <li><a href="#">課程試閱</a></li>
+                       <li class="First_li">
+                           <a href="#home">熱門國家考試</a>
+                       </li>
+                   </ul>
+               </div>
+               <div class="dropdown-menu collapse  MainList">
+                   <div><a href="#">公職考試</a></div>
+                   <div><a href="#">國營事業</a></div>
+                   <div><a href="#">銀行招考</a></div>
+                   <div><a href="#">會計證照</a></div>
+                   <div><a href="#">專技證照</a></div>
+                   <div><a href="#">金融證照</a></div>
+                   <div><a href="#">醫護證照</a></div>
+                   <div><a href="#">教職升學</a></div>
+                   <div><a href="#">考情說明</a></div>
+               </div>
+               <div class="Prefab NewsComponent _PrefabEmpty  hidden-xs">
+                   <div class="panel panel-default news-nav-tabs">
+                       <div class="panel-heading nav-tabs ">
+                           <div class="nav-tabs-li"><a href="#home">新聞快報</a></div>
+                           <div class="nav-tabs-li"><a href="#">最新快訊</a></div>
+                           <div class="nav-tabs-li"><a href="#">公職考試</a></div>
+                           <div class="nav-tabs-li"><a href="#">國營事業</a></div>
+                           <div class="nav-tabs-li"><a href="#">金融銀行</a></div>
+                           <div class="nav-tabs-li"><a href="#">就業考試</a></div>
+                           <div class="nav-tabs-li"><a href="#">專技證照</a></div>
+                           <div class="nav-tabs-li"><a href="#">升學考試</a></div>
+                       </div>
+
+                       <div class="flexItem">
+                           <div>
+                               <img src="~/Testphoto/1.jpg" class="Photo_Box backgroundpic" />
+                           </div>
+
+                           <div class="overlay">
+                               <div class="text">Hello World</div>
+                           </div>
+                       </div>
+
+                       <div class="flexItem">
+                           <div>
+                               <img src="~/Testphoto/2.jpg" class="Photo_Box backgroundpic" />
+                           </div>
+                           <div class="overlay">
+                               <div class="text">Hello World</div>
+                           </div>
+                       </div>
+                       <div class="flexItem">
+                           <div>
+                               <img src="~/Testphoto/3.jpg" class="Photo_Box backgroundpic" />
+                           </div>
+                           <div class="overlay">
+                               <div class="text">Hello World</div>
+                           </div>
+                       </div>
+                       <div class="flexItem">
+                           <div>
+                               <img src="~/Testphoto/4.jpg" class="Photo_Box backgroundpic" />
+                           </div>
+                           <div class="overlay">
+                               <div class="text">Hello World</div>
+                           </div>
+                       </div>
+                   </div>
+
+               </div>
+               <div class="row Prefab _PrefabDividingLine ">
+                   <hr>
+               </div>
+               <div class="_PrefabType1">
+
+                   <div class="flex-container">
+                       <div class="PrefabTitle">
+                           <div>考試資訊站</div>
+                       </div>
+                       <div class="PrefabBody">
+                           <div class="ElementTabs">
+                               <div class="nav-tabs"><a>全類別</a></div>
+                               <div class="nav-tabs"><a>公職考試</a></div>
+                               <div class="nav-tabs"><a>國營就業</a></div>
+                               <div class="nav-tabs"><a>銀行招考</a></div>
+                           </div>
+                       </div>
+                   </div>
+                   <div class="flex-container">
                    </div>
                </div>
            </div>
        </div>
+    
    </div>
 
 
