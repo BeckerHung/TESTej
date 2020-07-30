@@ -76,7 +76,7 @@ main {
     border-radius: 7px;
 }
 
-    .slide_toggle + div {
+.slide_toggle + div {
         display: none;
         margin-top: 10px;
         /* 隱藏註解文字區塊, 請加入自訂 CSS 效果 */
@@ -124,7 +124,7 @@ main {
    appearance: none;
 }
 
-    .currency input {
+.currency input {
         border: 0;
         background: transparent;
         font-size: 22px;
@@ -182,8 +182,6 @@ select:focus, input:focus, button:focus {
     font-weight: 500;
     width: 100%;
 }
-
-
 
 .chapter-content h3 {
         font-size: 13pt !important;

@@ -576,7 +576,10 @@ namespace ShoppingMail.Controllers
             return PartialView("_ProductcardPartial", model.ToList());
         }
 
-
+        public ActionResult Test()
+        {
+            return View();
+        }
 
 
 

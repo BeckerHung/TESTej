@@ -223,7 +223,7 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
+    <Content Include="Content\test.css" />
     <Content Include="Models\dbShoppingMailModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>dbShoppingMailModel.Context.cs</LastGenOutput>
@@ -234,7 +234,7 @@
       <DependentUpon>dbShoppingMailModel.edmx</DependentUpon>
       <LastGenOutput>dbShoppingMailModel.cs</LastGenOutput>
     </Content>
-    <Content Include="Scripts\all.js" />
+    <Content Include="Scripts\test.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="Models\dbShoppingMailModel.edmx">
@@ -263,6 +263,7 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\strip.pkgd.min.js" />
     <Content Include="Scripts\try.js" />
+    <Content Include="Testphoto\logo-3people.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -291,6 +292,7 @@
     <Content Include="Views\Home\Create.cshtml" />
     <Content Include="Views\Home\Product.cshtml" />
     <Content Include="Views\Home\ShowOrderdetail.cshtml" />
+    <Content Include="Views\Home\test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Photos\" />
