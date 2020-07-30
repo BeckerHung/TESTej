@@ -1,4 +1,4 @@
-﻿ul {
+﻿navbar-nav > ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -14,9 +14,9 @@
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#95dedf', endColorstr='#2acdd3',GradientType=0 );
     height: 50px;
 }
- li > a:hover {
-        color: #ffffff;
-        background-color: #00b3b7;
+navbar-nav > li > a:hover {
+    color: #ffffff;
+    background-color: #00b3b7;
 }
 
 .logo {
@@ -24,10 +24,10 @@
 }
 
 
- li > a {
-        color: #ffffff;
-        background-color:#00b3b7;
-    }
+navbar-nav > li > a {
+    color: #ffffff;
+    background-color: #00b3b7;
+}
 li {
     float: right;
 }
@@ -40,9 +40,10 @@ li i {
         text-decoration: none;
 }
 
-li i:hover {
-            background-color: #00b3b7;
+navbar-nav>li i:hover {
+    background-color: #00b3b7;
 }
+
 
 .active {
     background-color: #4CAF50;
@@ -157,13 +158,9 @@ li i:hover {
 
 .carousel-bullet:hover {
         color: #aaaaaa;
-    }
-
-#carousel-1:checked ~ .control-1 ~ .carousel-indicators li:nth-child(1) .carousel-bullet,
-#carousel-2:checked ~ .control-2 ~ .carousel-indicators li:nth-child(2) .carousel-bullet,
-#carousel-3:checked ~ .control-3 ~ .carousel-indicators li:nth-child(3) .carousel-bullet {
-    color: #428bca;
 }
+
+
 
 #title {
     width: 100%;
@@ -180,3 +177,91 @@ li i:hover {
 
 /*carousel*/
 
+/*中間navber*/
+.navbar.navbar-3people-blue-light {
+    background: #80d6d9;
+    border-color: #59c9cd;
+    color: #154445;
+    margin-top: 5px;
+}
+.navbar.navbar-3people-blue-light > ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #80d6d9;
+}
+
+.navbar.navbar-3people-blue-light >li {
+    float: left;
+}
+
+.navbar.navbar-3people-blue-light li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+}
+
+.navbar.navbar-3people-blue-light li a:hover {
+            background-color: #59c9cd;
+}
+.navbar .First_li {
+    min-width: 170px;
+    text-align: center;
+
+}
+
+.First_li {
+    float: left;
+    margin-left: 10px;
+}
+
+
+/*中間navber*/
+
+.dropdown-menu {
+    position: relative;
+    z-index: 1000;
+    float: left;
+    width: 200px;
+    height: 300px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    font-size: 14px;
+    list-style: none;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    background-clip: padding-box;
+}
+.MainList div {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: white;
+    text-align: center;
+}
+
+    .MainList div a {
+        display: block;
+
+        padding: 8px 16px;
+        text-decoration: none;
+        color: #154445;
+    }
+
+.MainList div h3.active {
+    background-color: white;
+    color: black;
+}
+
+.MainList div a:hover:not(.active) {
+    background-color: #ef8669;
+    color: black;
+}
