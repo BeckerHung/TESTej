@@ -264,6 +264,12 @@
     <Content Include="Scripts\strip.pkgd.min.js" />
     <Content Include="Scripts\try.js" />
     <Content Include="Testphoto\logo-3people.png" />
+    <Content Include="Testphoto\三倍券.jpg" />
+    <Content Include="Testphoto\國營投考.jpg" />
+    <Content Include="Testphoto\就業季.jpg" />
+    <Content Include="Testphoto\武漢肺炎.jpg" />
+    <Content Include="Testphoto\金融基測.jpg" />
+    <Content Include="Testphoto\銀行考衝班.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
