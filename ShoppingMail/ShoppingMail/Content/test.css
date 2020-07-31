@@ -48,9 +48,11 @@ navbar-nav>li i:hover {
 .active {
     background-color: #4CAF50;
 }
+.text-shadow {
+    font-style: normal;
+    text-decoration: none;
+}
 /*carousel*/
-
-
 .container {
     width: 1170px;
     padding-right: 15px;
@@ -221,9 +223,32 @@ height:1700px;
     margin-left: 10px;
 }
 
+.dropdown-right-onhover:hover  .dropdown-menu-show {
+    display: block;
+}
+.dropdown-menu-show {
+    position: absolute;
+    margin-top: 0;
+    margin-left: .125rem;
+    top: 50px;
+    left: 200px;
+    z-index: 1000;
+    display: none;
+    float: left;
+    width: 800px;
+    height: 270px;
+    padding: .5rem 0;
+    margin: .125rem 0 0;
+    font-size: 1rem;
+   
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid;
+    border-radius: .25rem;
+    border-color: #59c9cd;
+}
 
 /*中間navber*/
-
 .dropdown-menu {
     position: relative;
     z-index: 1000;
@@ -242,6 +267,7 @@ height:1700px;
     box-shadow: 0 6px 12px rgba(0,0,0,.175);
     background-clip: padding-box;
 }
+
 .MainList div {
     list-style-type: none;
     margin: 0;
@@ -267,7 +293,10 @@ height:1700px;
 .MainList div a:hover:not(.active) {
     background-color: #ef8669;
     color: black;
+
 }
+
+
 .WebPageStyle_Default .NavbarDiv .Prefab {
     margin: 5px;
 }
@@ -371,7 +400,7 @@ height:1700px;
 /*分隔線*/
 ._PrefabDividingLine hr {
     border-top: 1px dashed #bbb;
-    margin: 20px 0;
+    margin: 30px 0;
 }
 
 /*分隔線*/
@@ -386,8 +415,12 @@ body {
     width: 360px;
     height: 450px;
     background-color: white;
-    border: 1px
+    border: 1px;
+    float: left;
+    float: left;
+    margin: 12px;
 }
+
 
 .PrefabTitle {
     background-color: #ef8669;
@@ -414,12 +447,159 @@ body {
 .nav-tabs {
     padding: 5px 5px 0px 15px;
     margin-bottom: 10px;
+    background-color: white;
+}
+.nav-tabs > a:active {
+        background-color: rgb(129, 214, 217);
+        color:white;
+
 }
 
-    .nav-tabs > a {
+.nav-tabs > a {
+        border: 1px solid #e7e7e7;
+        border-bottom: 0;
+        color: rgb(129, 214, 217);
+        padding: 5px 0;
+        background-color:white;
+    }
+
+.list-group-item.active {
+    z-index: 2;
+    color:red;
+}
+.list-group-item {
+    position: relative;
+    display: block;
+    margin-bottom: -1px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    color: #555;
+    text-align: center;
+    height: 30px;
+    border-bottom: 1px solid #ababab;
+}
+}
+.list-group-item-action {
+    width: 100%;
+    color: #495057;
+    text-align: inherit;
+}
+._ElementTabs .tab-content {
+    border: 1px solid rgba(169, 169, 169, 0.5);
+    margin: 10px 0;
+    padding: 0 5px;
+}
+.MoreInfoButton_Center {
+    margin: auto;
+}
+.MoreInfoButton {
+    background-color: #88d8dd;
+    color: white;
+    transform: skewX(160deg);
+    width: 100px;
+    text-align: center;
+    padding: 3px 0;
+
+}
+._PrefabType2 .PrefabTitle_triangle {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    top: 41px;
+    border-width: 13px 10px 0 10px;
+    border-color: rgb(129, 214, 217) transparent transparent transparent;
+    margin-left: 30px;
+    position: absolute;
+    z-index: 900;
+}
+
+.flex-container {
+    width: 360px;
+    height: 450px;
+    background-color: white;
+    border: 1px
+}
+
+.PrefabTitle {
+    background-color: #ef8669;
+    width: 100%;
+    height: 40px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+._PrefabType1 {
+    margin: 0 5px;
+}
+
+.PrefabBody {
+    background: white;
+    padding: 10px 0;
+}
+
+.ElementTabs {
+    display: -webkit-flex;
+    display: flex;
+}
+
+.nav-tabs {
+    padding: 5px 5px 0px 15px;
+    margin-bottom: 0px;
+}
+
+.nav-tabs > a {
         border: 1px solid #e7e7e7;
         border-bottom: 0;
         color: rgb(129, 214, 217);
         padding: 5px 0;
     }
+
+.list-group-item.active {
+    z-index: 2;
+    color: red;
+    border-bottom: 1px solid #ababab;
+}
+
+
+.list-group-item + .list-group-item {
+    border-top-width: 0;
+}
+
+.list-group {
+    border: 1px solid #ababab;
+    margin-bottom: 3px;
+}
+
+
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: .75rem 1.25rem;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.125);
+    color: #666;
+    border: 0px;
+    border-bottom: 2px solid #ababab;
+    text-decoration: none;
+    text-align: center;
+}
+
+.MoreInfoButton_Center > a {
+    background-color: #88d8dd;
+    color: white;
+    transform: skewX(160deg);
+    width: 100px;
+    text-align: center;
+    padding: 3px 0;
+    text-decoration: none;
+    margin: 0px auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
 /*卡片區*/
+/*心得*/
+
+
+/*心得*/
